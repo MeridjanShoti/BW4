@@ -96,5 +96,14 @@ public class MainATAC {
         Mezzo  mezzo7 = new Tram(InServizio.IN_SERVIZIO, tratta);
 
         List<Mezzo> mezzi = List.of(mezzo, mezzo2, mezzo3, mezzo4, mezzo5, mezzo6, mezzo7);
+
+        em.getTransaction().begin();
+        utenti.forEach(personeDAO::saveNoTx);
+        emissioni.forEach(emissioneDAO::saveNoTx);
+        titoliDiViaggio.forEach(titoliDiViaggioDAO::saveNoTx);
+        titoliDiViaggio2.forEach(titoliDiViaggioDAO::saveNoTx);
+        tratte.forEach(trattaDAO::saveNoTx);
+        mezzi.forEach(mezzoDAO::saveNoTx);
+        em.getTransaction().commit();
     }
 }

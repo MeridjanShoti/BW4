@@ -23,6 +23,6 @@ public class DistributoreAutomatico extends Emissione{
     }
     @Override
     public String toString() {
-        return "[id: " + getId()  + "\nLuogo di emissione: " + getLuogoEmissione() + "\ntitoli venduti:" + getConteggioTitoli()+ "\nattività: " +attivita + "]";
+        return "[id: " + getId()  + "\nLuogo di emissione: " + getCitta() + "\ntitoli venduti:" + getConteggioTitoli()+ "\nattività: " +attivita + "]";
     }
 }

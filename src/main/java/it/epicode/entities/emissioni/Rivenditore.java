@@ -21,6 +21,6 @@ public class Rivenditore extends Emissione{
     }
     @Override
     public String toString() {
-        return "[id: " + getId()  + "\nLuogo di emissione: " + getLuogoEmissione() + "\ntitoli venduti:" + getConteggioTitoli()+ "\n nome rivenditore: " + nomeRivenditore + "]";
+        return "[id: " + getId()  + "\nLuogo di emissione: " + getCitta() + "\ntitoli venduti:" + getConteggioTitoli()+ "\n nome rivenditore: " + nomeRivenditore + "]";
     }
 }
