@@ -26,7 +26,7 @@ public abstract class TitoloDiViaggio {
     public TitoloDiViaggio (){}
     @Override
     public String toString() {
-        return "[id: " + id  + "\ndata emissione: " + dataEmissione + "\nluogo di emissione: " + luogoEmissione.getLuogoEmissione() + "]";
+        return "[id: " + id  + "\ndata emissione: " + dataEmissione + "\nluogo di emissione: " + luogoEmissione.getCitta() + "]";
     }
 
     public Long getId() {

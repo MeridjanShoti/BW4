@@ -52,6 +52,6 @@ public class Abbonamento extends TitoloDiViaggio {
     }
     @Override
     public String toString() {
-        return "[id: " +getId() +  "\nDurata Validita: " + durataValidita + "\nData Scadenza: " + dataScadenza + "\nData Emissione: " + getDataEmissione() + "\nLuogo Emissione: " + getLuogoEmissione().getLuogoEmissione() + "]";
+        return "[id: " +getId() +  "\nDurata Validita: " + durataValidita + "\nData Scadenza: " + dataScadenza + "\nData Emissione: " + getDataEmissione() + "\nLuogo Emissione: " + getLuogoEmissione().getCitta() + "]";
     }
 }

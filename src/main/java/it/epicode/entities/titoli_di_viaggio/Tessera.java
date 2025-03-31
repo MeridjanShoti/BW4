@@ -50,6 +50,6 @@ public class Tessera extends TitoloDiViaggio {
     }
     @Override
     public String toString() {
-        return "[id: " +getId() +  "\nvalidita tessera: " + validitaTessera + "\nabbonamento: " + abbonamento + "\nutente: " + utente.getNome() + " " +utente.getCognome()+ "\ndata emissione: " + getDataEmissione() + "\nluogo di emissione: " + getLuogoEmissione().getLuogoEmissione() + "]";
+        return "[id: " +getId() +  "\nvalidita tessera: " + validitaTessera + "\nabbonamento: " + abbonamento + "\nutente: " + utente.getNome() + " " +utente.getCognome()+ "\ndata emissione: " + getDataEmissione() + "\nluogo di emissione: " + getLuogoEmissione().getCitta() + "]";
     }
 }
