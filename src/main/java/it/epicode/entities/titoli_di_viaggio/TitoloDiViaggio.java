@@ -5,14 +5,48 @@ import it.epicode.entities.persone.Utente;
 import it.epicode.enums.DurataValidita;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
 @Entity
 public abstract class TitoloDiViaggio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String dataEmissione;
+    private LocalDate dataEmissione;
     @ManyToOne
     private Emissione luogoEmissione;
 
+    public TitoloDiViaggio(LocalDate dataEmissione, Emissione luogoEmissione) {
+        this.dataEmissione = dataEmissione;
+        this.luogoEmissione = luogoEmissione;
+    }
+    public TitoloDiViaggio (){}
+    @Override
+    public String toString() {
+        return "[id: " + id  + "\ndata emissione: " + dataEmissione + "\nluogo di emissione: " + luogoEmissione.getLuogoEmissione() + "]";
+    }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDate getDataEmissione() {
+        return dataEmissione;
+    }
+
+    public void setDataEmissione(LocalDate dataEmissione) {
+        this.dataEmissione = dataEmissione;
+    }
+
+    public Emissione getLuogoEmissione() {
+        return luogoEmissione;
+    }
+
+    public void setLuogoEmissione(Emissione luogoEmissione) {
+        this.luogoEmissione = luogoEmissione;
+    }
 }
