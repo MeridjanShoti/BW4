@@ -2,6 +2,7 @@ package it.epicode.entities.emissioni;
 
 import it.epicode.enums.Attivita;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 @Entity
 public class DistributoreAutomatico extends Emissione{

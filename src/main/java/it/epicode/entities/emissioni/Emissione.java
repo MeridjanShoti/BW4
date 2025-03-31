@@ -1,11 +1,15 @@
 package it.epicode.entities.emissioni;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import it.epicode.entities.titoli_di_viaggio.Biglietto;
+import it.epicode.entities.titoli_di_viaggio.TitoloDiViaggio;
+import jakarta.persistence.*;
+
+import java.util.Scanner;
 
 @Entity
+@Table(name = "emissioni")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo_emissione")
 public abstract class Emissione {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,7 +49,7 @@ public abstract class Emissione {
     public boolean titoloValido (){
         return false;
     }
-    public void vendiBiglietto (){
+    public void vendiTitolo (){
 
     }
     public void vendiTessera (){

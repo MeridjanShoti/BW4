@@ -2,12 +2,12 @@ package it.epicode.entities.mezzi;
 
 import it.epicode.entities.tratte.Tratta;
 import it.epicode.enums.InServizio;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "mezzi")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo_mezzo")
 public abstract class Mezzo {
     @Id
     @GeneratedValue

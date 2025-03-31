@@ -1,12 +1,12 @@
 package it.epicode.entities.persone;
 
 import it.epicode.entities.titoli_di_viaggio.Tessera;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
 @Entity
+@Table (name = "utenti")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo_utente")
 public class Utente {
     @Id
     @GeneratedValue

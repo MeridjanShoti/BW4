@@ -8,6 +8,9 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table (name = "titoli_di_viaggio")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo_titolo_di_viaggio")
 public abstract class TitoloDiViaggio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

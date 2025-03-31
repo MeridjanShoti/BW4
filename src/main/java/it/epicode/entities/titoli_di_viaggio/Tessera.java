@@ -4,11 +4,12 @@ import it.epicode.entities.emissioni.Emissione;
 import it.epicode.entities.persone.Utente;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 
 @Entity
-public abstract class Tessera extends TitoloDiViaggio {
+public class Tessera extends TitoloDiViaggio {
     private boolean validitaTessera = true;
     @OneToOne
     private Abbonamento abbonamento = null;

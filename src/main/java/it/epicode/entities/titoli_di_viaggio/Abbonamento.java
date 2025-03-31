@@ -4,6 +4,7 @@ import it.epicode.entities.emissioni.Emissione;
 import it.epicode.enums.DurataValidita;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 
@@ -11,7 +12,7 @@ import java.time.LocalDate;
 public class Abbonamento extends TitoloDiViaggio {
     private DurataValidita durataValidita;
     private LocalDate dataScadenza;
-    @OneToOne(mappedBy = "tessera")
+    @OneToOne
     private Tessera tessera;
 
     public Abbonamento(DurataValidita durataValidita, LocalDate dataEmissione, Emissione luogoEmissione, Tessera tessera) {

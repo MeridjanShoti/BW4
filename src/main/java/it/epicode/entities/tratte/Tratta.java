@@ -1,14 +1,12 @@
 package it.epicode.entities.tratte;
 
 import it.epicode.entities.mezzi.Mezzo;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
+@Table(name = "tratte")
 public class Tratta {
     @Id
     @GeneratedValue

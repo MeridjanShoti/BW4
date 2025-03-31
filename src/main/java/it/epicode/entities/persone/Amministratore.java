@@ -2,6 +2,7 @@ package it.epicode.entities.persone;
 
 import it.epicode.entities.titoli_di_viaggio.Tessera;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 @Entity
 public class Amministratore extends Utente {
