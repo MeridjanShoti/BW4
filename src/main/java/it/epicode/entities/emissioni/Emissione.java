@@ -15,10 +15,10 @@ public abstract class Emissione {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int conteggioTitoli = 0;
-    private String luogoEmissione;
+    private String citta;
 
     public Emissione(String luogoEmissione) {
-        this.luogoEmissione = luogoEmissione;
+        this.citta = luogoEmissione;
     }
     public Emissione (){}
 
@@ -38,12 +38,12 @@ public abstract class Emissione {
         this.conteggioTitoli = conteggioTitoli;
     }
 
-    public String getLuogoEmissione() {
-        return luogoEmissione;
+    public String getCitta() {
+        return citta;
     }
 
-    public void setLuogoEmissione(String luogoEmissione) {
-        this.luogoEmissione = luogoEmissione;
+    public void setCitta(String citta) {
+        this.citta = citta;
     }
 
     public boolean titoloValido (){
@@ -63,6 +63,6 @@ public abstract class Emissione {
     }
     @Override
     public String toString() {
-        return "[id: " + id  + "\nLuogo di emissione: " + luogoEmissione + "\ntitoli venduti: " + conteggioTitoli+ "]";
+        return "[id: " + id  + "\nLuogo di emissione: " + citta + "\ntitoli venduti: " + conteggioTitoli+ "]";
     }
 }

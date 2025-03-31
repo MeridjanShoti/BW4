@@ -27,6 +27,6 @@ public class Biglietto extends TitoloDiViaggio {
     }
     @Override
     public String toString() {
-        return "[id: " +getId() +  "\nvalidita biglietto: " + validita + "\nemissione: " + getLuogoEmissione().getLuogoEmissione() + "\ndata emissione: " + getDataEmissione() + "]";
+        return "[id: " +getId() +  "\nvalidita biglietto: " + validita + "\nemissione: " + getLuogoEmissione().getCitta() + "\ndata emissione: " + getDataEmissione() + "]";
     }
 }
