@@ -6,36 +6,36 @@ import jakarta.persistence.EntityManager;
 
 import java.time.LocalDate;
 
-public class PersoneDAO {
+public class UtenteDAO {
     private EntityManager em;
-    public PersoneDAO(EntityManager em) {
+    public UtenteDAO(EntityManager em) {
         this.em = em;
     }
-    public void save(Object persona) {
+    public void save(Utente persona) {
         em.getTransaction().begin();
         em.persist(persona);
         em.getTransaction().commit();
     }
-    public Object getById(int id) {
-        return em.find(Object.class, id);
+    public Utente getById(int id) {
+        return em.find(Utente.class, id);
     }
-    public void update(Object persona) {
+    public void update(Utente persona) {
         em.getTransaction().begin();
         em.merge(persona);
         em.getTransaction().commit();
     }
-    public void delete(Object persona) {
+    public void delete(Utente persona) {
         em.getTransaction().begin();
         em.remove(persona);
         em.getTransaction().commit();
     }
-    public void updateNoTx(Object persona) {
+    public void updateNoTx(Utente persona) {
         em.merge(persona);
     }
-    public void deleteNoTx(Object persona) {
+    public void deleteNoTx(Utente persona) {
         em.remove(persona);
     }
-    public void saveNoTx(Object persona) {
+    public void saveNoTx(Utente persona) {
         em.persist(persona);
     }
 

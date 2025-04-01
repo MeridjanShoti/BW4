@@ -1,28 +1,12 @@
 package it.epicode;
 
 import it.epicode.dao.*;
-import it.epicode.entities.emissioni.DistributoreAutomatico;
-import it.epicode.entities.emissioni.Emissione;
-import it.epicode.entities.emissioni.Rivenditore;
-import it.epicode.entities.mezzi.Autobus;
-import it.epicode.entities.mezzi.Mezzo;
-import it.epicode.entities.mezzi.Tram;
-import it.epicode.entities.persone.Amministratore;
 import it.epicode.entities.persone.Utente;
-import it.epicode.entities.titoli_di_viaggio.Abbonamento;
-import it.epicode.entities.titoli_di_viaggio.Biglietto;
-import it.epicode.entities.titoli_di_viaggio.Tessera;
-import it.epicode.entities.titoli_di_viaggio.TitoloDiViaggio;
-import it.epicode.entities.tratte.Tratta;
-import it.epicode.enums.Attivita;
-import it.epicode.enums.DurataValidita;
-import it.epicode.enums.InServizio;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Scanner;
 
 public class MainATAC {
@@ -31,7 +15,7 @@ public class MainATAC {
         EntityManager em = emf.createEntityManager();
         EmissioneDAO emissioneDAO = new EmissioneDAO(em);
         MezzoDAO mezzoDAO = new MezzoDAO(em);
-        PersoneDAO personeDAO = new PersoneDAO(em);
+        UtenteDAO utenteDAO = new UtenteDAO(em);
         TitoliDiViaggioDAO titoliDiViaggioDAO = new TitoliDiViaggioDAO(em);
         TrattaDAO trattaDAO = new TrattaDAO(em);
 
@@ -127,7 +111,7 @@ public class MainATAC {
                     String nome = scanner.next();
                     System.out.print("Inserisci il cognome dell'utente: ");
                     String cognome = scanner.next();
-                    personeDAO.creaUtente(nome, cognome);
+                    utenteDAO.creaUtente(nome, cognome);
                     break;
                 case 2:
                     System.out.print("Inserisci l'ID dell'utente per creare la tessera: ");
@@ -145,7 +129,7 @@ public class MainATAC {
                     LocalDate dataEmissione = LocalDate.of(anno, mese, giorno);
                     Utente utente = em.find(Utente.class, idUtente);
                     if (utente != null) {
-                        personeDAO.creaTessera(utente, dataEmissione);
+                        utenteDAO.creaTessera(utente, dataEmissione);
                     } else {
                         System.out.println("Utente non trovato.");
                     }

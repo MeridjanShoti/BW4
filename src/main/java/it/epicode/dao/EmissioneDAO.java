@@ -1,7 +1,6 @@
 package it.epicode.dao;
 
 import it.epicode.entities.emissioni.Emissione;
-import it.epicode.entities.persone.Utente;
 import it.epicode.entities.titoli_di_viaggio.Abbonamento;
 import it.epicode.entities.titoli_di_viaggio.Biglietto;
 import it.epicode.entities.titoli_di_viaggio.Tessera;
@@ -14,7 +13,7 @@ import java.util.Scanner;
 
 public class EmissioneDAO {
     private static EntityManager em;
-    private static PersoneDAO utenteDAO = new PersoneDAO(em);
+    private static UtenteDAO utenteDAO = new UtenteDAO(em);
     private static TitoliDiViaggioDAO tdvDAO = new TitoliDiViaggioDAO(em);
 
     public EmissioneDAO(EntityManager em) {
