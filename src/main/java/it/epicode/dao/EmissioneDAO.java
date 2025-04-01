@@ -1,7 +1,11 @@
 package it.epicode.dao;
 
 import it.epicode.entities.emissioni.Emissione;
+import it.epicode.entities.persone.Utente;
+import it.epicode.entities.titoli_di_viaggio.Tessera;
 import jakarta.persistence.EntityManager;
+
+import java.util.Scanner;
 
 public class EmissioneDAO {
     private EntityManager em;
@@ -50,5 +54,24 @@ public class EmissioneDAO {
     }
     public void updateNoTx(Emissione emissione) {
         em.merge(emissione);
+    }
+
+    public static void creaTesseraPerUtente(EntityManager em, Utente utente) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Creazione tessera per l'utente: " + utente.getNome() + " " + utente.getCognome());
+        System.out.print("Inserisci il numero della tessera: ");
+        Long numeroTessera = scanner.nextLong();
+
+
+        Tessera tessera = new Tessera();
+        tessera.setId(numeroTessera);
+        tessera.setUtente(utente);
+
+
+        em.getTransaction().begin();
+        em.persist(tessera);
+        em.getTransaction().commit();
+
+        utente.setTessera(tessera);
     }
 }

@@ -52,4 +52,6 @@ public class Tessera extends TitoloDiViaggio {
     public String toString() {
         return "[id: " +getId() +  "\nvalidita tessera: " + validitaTessera + "\nabbonamento: " + abbonamento + "\nutente: " + utente.getNome() + " " +utente.getCognome()+ "\ndata emissione: " + getDataEmissione() + "\nluogo di emissione: " + getLuogoEmissione().getCitta() + "]";
     }
+
+
 }
