@@ -125,6 +125,11 @@ public class EmissioneDAO {
                 long codiceEmissione2 = scanner.nextLong();
                 scanner.nextLine();
                 TitoloDiViaggio biglietto = new Biglietto(LocalDate.of(anno2, mese2, giorno2), getById(codiceEmissione2));
+                try {
+                    tdvDAO.save(biglietto);
+                } catch (Exception e) {
+                    tdvDAO.update(biglietto);
+                }
                 break;
             case 3:
                 System.out.println("Hai selezionato: Esci");

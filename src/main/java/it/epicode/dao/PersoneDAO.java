@@ -4,6 +4,8 @@ import it.epicode.entities.persone.Utente;
 import it.epicode.entities.titoli_di_viaggio.Tessera;
 import jakarta.persistence.EntityManager;
 
+import java.time.LocalDate;
+
 public class PersoneDAO {
     private EntityManager em;
     public PersoneDAO(EntityManager em) {
@@ -48,9 +50,10 @@ public class PersoneDAO {
         System.out.println("Utente creato: " + nome + " " + cognome);
     }
 
-    public void creaTessera(Utente utente) {
+    public void creaTessera(Utente utente, LocalDate  dataEmissione) {
         Tessera tessera = new Tessera();
         tessera.setUtente(utente);
+        tessera.setDataEmissione(dataEmissione);
 
         em.getTransaction().begin();
         em.persist(tessera);

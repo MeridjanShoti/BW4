@@ -15,7 +15,7 @@ public abstract class TitoloDiViaggio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate dataEmissione;
+    private LocalDate dataEmissione = LocalDate.now();
     @ManyToOne
     private Emissione luogoEmissione;
 
@@ -43,6 +43,7 @@ public abstract class TitoloDiViaggio {
 
     public void setDataEmissione(LocalDate dataEmissione) {
         this.dataEmissione = dataEmissione;
+
     }
 
     public Emissione getLuogoEmissione() {

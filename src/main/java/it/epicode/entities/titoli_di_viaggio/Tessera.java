@@ -53,5 +53,11 @@ public class Tessera extends TitoloDiViaggio {
         return "[id: " +getId() +  "\nscadenza: " + dataScadenza+ "\nabbonamento: " + abbonamento + "\nutente: " + utente.getNome() + " " +utente.getCognome()+ "\ndata emissione: " + getDataEmissione() + "\nluogo di emissione: " + getLuogoEmissione().getCitta() + "]";
     }
 
+    @Override
+    public void setDataEmissione(LocalDate dataEmissione) {
+        super.setDataEmissione(dataEmissione);
+        this.dataScadenza = dataEmissione.plusYears(1);
+    }
+
 
 }

@@ -132,9 +132,20 @@ public class MainATAC {
                 case 2:
                     System.out.print("Inserisci l'ID dell'utente per creare la tessera: ");
                     Long idUtente = scanner.nextLong();
+                    scanner.nextLine();
+                    System.out.println("Inserisci l'anno corrente");
+                    int anno = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Inserisci il mese corrente");
+                    int mese = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Inserisci il giorno corrente");
+                    int giorno = scanner.nextInt();
+                    scanner.nextLine();
+                    LocalDate dataEmissione = LocalDate.of(anno, mese, giorno);
                     Utente utente = em.find(Utente.class, idUtente);
                     if (utente != null) {
-                        personeDAO.creaTessera(utente);
+                        personeDAO.creaTessera(utente, dataEmissione);
                     } else {
                         System.out.println("Utente non trovato.");
                     }
