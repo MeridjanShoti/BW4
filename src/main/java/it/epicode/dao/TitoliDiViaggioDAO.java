@@ -4,7 +4,7 @@ import it.epicode.entities.titoli_di_viaggio.TitoloDiViaggio;
 import jakarta.persistence.EntityManager;
 
 public class TitoliDiViaggioDAO {
-    private EntityManager em;
+    private static EntityManager em;
 
     public TitoliDiViaggioDAO(EntityManager em) {
         this.em = em;
@@ -19,7 +19,7 @@ public class TitoliDiViaggioDAO {
             System.out.println(e.getMessage());
         }
     }
-    public TitoloDiViaggio getById(Long id) {
+    public static TitoloDiViaggio getById(Long id) {
         return em.find(TitoloDiViaggio.class, id);
     }
     public void delete(TitoloDiViaggio titoloDiViaggio) {
