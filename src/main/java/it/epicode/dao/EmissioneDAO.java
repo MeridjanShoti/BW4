@@ -68,8 +68,7 @@ public class EmissioneDAO {
         System.out.println("Seleziona l'operazione da effettuare: ");
         System.out.println("1. Acquista un abbonamento");
         System.out.println("2. Acquista un biglietto");
-        System.out.println("3. Acquista una tessera");
-        System.out.println("4. Esci");
+        System.out.println("3. Esci");
         int scelta = scanner.nextInt();
         scanner.nextLine();
         switch (scelta) {
@@ -127,7 +126,7 @@ public class EmissioneDAO {
                 scanner.nextLine();
                 TitoloDiViaggio biglietto = new Biglietto(LocalDate.of(anno2, mese2, giorno2), getById(codiceEmissione2));
                 break;
-            case 4:
+            case 3:
                 System.out.println("Hai selezionato: Esci");
                 break;
             default:
