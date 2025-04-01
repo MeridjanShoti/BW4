@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 @Entity
 public class Tessera extends TitoloDiViaggio {
-    private boolean validitaTessera = true;
+    private LocalDate dataScadenza = getDataEmissione().plusYears(1);
     @OneToOne
     private Abbonamento abbonamento = null;
     @OneToOne (mappedBy = "tessera")
@@ -25,12 +25,12 @@ public class Tessera extends TitoloDiViaggio {
 
     }
 
-    public boolean isValiditaTessera() {
-        return validitaTessera;
+    public LocalDate getDataScadenza() {
+        return dataScadenza;
     }
 
-    public void setValiditaTessera(boolean validitaTessera) {
-        this.validitaTessera = validitaTessera;
+    public void setDataScadenza(LocalDate dataScadenza) {
+        this.dataScadenza = dataScadenza;
     }
 
     public Abbonamento getAbbonamento() {
@@ -50,7 +50,7 @@ public class Tessera extends TitoloDiViaggio {
     }
     @Override
     public String toString() {
-        return "[id: " +getId() +  "\nvalidita tessera: " + validitaTessera + "\nabbonamento: " + abbonamento + "\nutente: " + utente.getNome() + " " +utente.getCognome()+ "\ndata emissione: " + getDataEmissione() + "\nluogo di emissione: " + getLuogoEmissione().getCitta() + "]";
+        return "[id: " +getId() +  "\nscadenza: " + dataScadenza+ "\nabbonamento: " + abbonamento + "\nutente: " + utente.getNome() + " " +utente.getCognome()+ "\ndata emissione: " + getDataEmissione() + "\nluogo di emissione: " + getLuogoEmissione().getCitta() + "]";
     }
 
 
