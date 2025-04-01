@@ -144,36 +144,14 @@ public class EmissioneDAO {
 
         }
 
-public void acquistoAbbonamento(Utente utente, String tipo, int durata) {
-    // Creazione dell'oggetto abbonamento
-    Abbonamento abbonamento = new Abbonamento();
-    abbonamento.setUtente(utente);
-    abbonamento.setTipo(tipo);
-    abbonamento.setDurata(durata);
 
 
 
-    em.getTransaction().begin();
-    em.persist(abbonamento);
-    em.getTransaction().commit();
-
-    System.out.println("Abbonamento acquistato per " + utente.getNome() + " " + utente.getCognome());
-}
-
-public void acquistoBiglietto(Utente utente) {
-
-    Biglietto biglietto = new Biglietto();
-    biglietto.setUtente(utente);
-    biglietto.setValidita(true);
-
-
-
-    em.getTransaction().begin();
-    em.persist(biglietto);
-    em.getTransaction().commit();
-
-    System.out.println("Biglietto acquistato per " + utente.getNome() + " " + utente.getCognome());
-}
     }
+
+
+
+
+
 
 

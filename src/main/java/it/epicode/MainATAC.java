@@ -140,28 +140,9 @@ public class MainATAC {
                     }
                     break;
                 case 3:
-                    System.out.print("Inserisci l'ID dell'utente per acquistare biglietto/abbonamento: ");
-                    idUtente = scanner.nextLong();
-                    utente = em.find(Utente.class, idUtente);
-                    if (utente != null) {
-                        System.out.println("Cosa vuoi acquistare?");
-                        System.out.println("1. Biglietto");
-                        System.out.println("2. Abbonamento");
-                        System.out.print("Scegli (1 o 2): ");
-                        int sceltaAcquisto = scanner.nextInt();
-                        if (sceltaAcquisto == 1) {
-                            emissioneDAO.acquistoBiglietto(utente);
-                        } else if (sceltaAcquisto == 2) {
-                            System.out.print("Inserisci la durata dell'abbonamento (in mesi): ");
-                            int durata = scanner.nextInt();
-                            System.out.print("Inserisci il tipo di abbonamento (mensile, annuale): ");
-                            String tipoAbbonamento = scanner.next();
-                            emissioneDAO.acquistoAbbonamento(utente, tipoAbbonamento, durata);
-                        }
-                    } else {
-                        System.out.println("Utente non trovato.");
-                    }
+                   emissioneDAO.vendiTitoloDiViaggio();
                     break;
+
                 case 4:
                     continua = false;
                     System.out.println("Arrivederci!");
