@@ -4,9 +4,9 @@ import it.epicode.entities.emissioni.Emissione;
 import it.epicode.enums.DurataValidita;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 public class Abbonamento extends TitoloDiViaggio {
@@ -54,4 +54,6 @@ public class Abbonamento extends TitoloDiViaggio {
     public String toString() {
         return "[id: " +getId() +  "\nDurata Validita: " + durataValidita + "\nData Scadenza: " + dataScadenza + "\nData Emissione: " + getDataEmissione() + "\nLuogo Emissione: " + getLuogoEmissione().getCitta() + "]";
     }
+
+
 }

@@ -52,4 +52,14 @@ public abstract class TitoloDiViaggio {
     public void setLuogoEmissione(Emissione luogoEmissione) {
         this.luogoEmissione = luogoEmissione;
     }
+
+    public void setUtente(Utente utente) {
+    }
+
+
+    public void setTipo(String tipo) {
+    }
+
+    public void setDurata(int durata) {
+    }
 }

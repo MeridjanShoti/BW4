@@ -23,6 +23,7 @@ import jakarta.persistence.Persistence;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Scanner;
 
 public class MainATAC {
     public static void main(String[] args) {
@@ -34,7 +35,7 @@ public class MainATAC {
         TitoliDiViaggioDAO titoliDiViaggioDAO = new TitoliDiViaggioDAO(em);
         TrattaDAO trattaDAO = new TrattaDAO(em);
 
-        Utente utente = new Utente("Giuseppe", "Verdi", null);
+     /*   Utente utente = new Utente("Giuseppe", "Verdi", null);
         Utente utente2 = new Utente("Mario", "Rossi", null);
         Utente utente3 = new Utente("Luca", "Bianchi", null);
         Utente utente4 = new Utente("Andrea", "Neri", null);
@@ -105,6 +106,69 @@ public class MainATAC {
         tratte.forEach(trattaDAO::saveNoTx);
         mezzi.forEach(mezzoDAO::saveNoTx);
         em.getTransaction().commit();
-        EmissioneDAO.vendiTitoloDiViaggio();
+        EmissioneDAO.vendiTitoloDiViaggio();  */
+
+
+        Scanner scanner = new Scanner(System.in);
+        boolean continua = true;
+
+        while (continua) {
+            System.out.println("\nScegli un'opzione:");
+            System.out.println("1. Crea nuovo utente");
+            System.out.println("2. Crea tessera per utente");
+            System.out.println("3. Acquista biglietto o abbonamento");
+            System.out.println("4. Uscire");
+            System.out.print("Scegli (1, 2, 3, 4): ");
+            int scelta = scanner.nextInt();
+
+            switch (scelta) {
+                case 1:
+                    System.out.print("Inserisci il nome dell'utente: ");
+                    String nome = scanner.next();
+                    System.out.print("Inserisci il cognome dell'utente: ");
+                    String cognome = scanner.next();
+                    personeDAO.creaUtente(nome, cognome);
+                    break;
+                case 2:
+                    System.out.print("Inserisci l'ID dell'utente per creare la tessera: ");
+                    Long idUtente = scanner.nextLong();
+                    Utente utente = em.find(Utente.class, idUtente);
+                    if (utente != null) {
+                        personeDAO.creaTessera(utente);
+                    } else {
+                        System.out.println("Utente non trovato.");
+                    }
+                    break;
+                case 3:
+                    System.out.print("Inserisci l'ID dell'utente per acquistare biglietto/abbonamento: ");
+                    idUtente = scanner.nextLong();
+                    utente = em.find(Utente.class, idUtente);
+                    if (utente != null) {
+                        System.out.println("Cosa vuoi acquistare?");
+                        System.out.println("1. Biglietto");
+                        System.out.println("2. Abbonamento");
+                        System.out.print("Scegli (1 o 2): ");
+                        int sceltaAcquisto = scanner.nextInt();
+                        if (sceltaAcquisto == 1) {
+                            emissioneDAO.acquistoBiglietto(utente);
+                        } else if (sceltaAcquisto == 2) {
+                            System.out.print("Inserisci la durata dell'abbonamento (in mesi): ");
+                            int durata = scanner.nextInt();
+                            System.out.print("Inserisci il tipo di abbonamento (mensile, annuale): ");
+                            String tipoAbbonamento = scanner.next();
+                            emissioneDAO.acquistoAbbonamento(utente, tipoAbbonamento, durata);
+                        }
+                    } else {
+                        System.out.println("Utente non trovato.");
+                    }
+                    break;
+                case 4:
+                    continua = false;
+                    System.out.println("Arrivederci!");
+                    break;
+                default:
+                    System.out.println("Scelta non valida.");
+            }
+        }
     }
 }

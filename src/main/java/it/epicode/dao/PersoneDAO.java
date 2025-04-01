@@ -1,5 +1,7 @@
 package it.epicode.dao;
 
+import it.epicode.entities.persone.Utente;
+import it.epicode.entities.titoli_di_viaggio.Tessera;
 import jakarta.persistence.EntityManager;
 
 public class PersoneDAO {
@@ -34,4 +36,31 @@ public class PersoneDAO {
     public void saveNoTx(Object persona) {
         em.persist(persona);
     }
+
+    public void creaUtente(String nome, String cognome) {
+        Utente utente = new Utente();
+        utente.setNome(nome);
+        utente.setCognome(cognome);
+
+        em.getTransaction().begin();
+        em.persist(utente);
+        em.getTransaction().commit();
+        System.out.println("Utente creato: " + nome + " " + cognome);
+    }
+
+    public void creaTessera(Utente utente) {
+        Tessera tessera = new Tessera();
+        tessera.setUtente(utente);
+
+        em.getTransaction().begin();
+        em.persist(tessera);
+        em.getTransaction().commit();
+
+        utente.setTessera(tessera);
+        System.out.println("Tessera creata per " + utente.getNome() + " " + utente.getCognome());
+    }
+
+
+
+
 }
