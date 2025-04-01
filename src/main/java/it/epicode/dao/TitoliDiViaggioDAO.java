@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class TitoliDiViaggioDAO {
-    private static EntityManager em;
+    private  EntityManager em;
 
     public TitoliDiViaggioDAO(EntityManager em) {
         this.em = em;
@@ -20,7 +20,7 @@ public class TitoliDiViaggioDAO {
             em.getTransaction().commit();
 
     }
-    public static TitoloDiViaggio getById(Long id) {
+    public TitoloDiViaggio getById(Long id) {
         return em.find(TitoloDiViaggio.class, id);
     }
     public void delete(TitoloDiViaggio titoloDiViaggio) {
@@ -44,9 +44,6 @@ public class TitoliDiViaggioDAO {
         em.persist(titoloDiViaggio);
     }
     public Long findBigliettoByTempo(LocalDate data1, LocalDate data2) {
-        return em.createNamedQuery("Biglietto.findBigliettoByTempo", Long.class)
-                .setParameter("data1", data1)
-                .setParameter("data2", data2)
-                .getSingleResult();
+        return em.createNamedQuery("Biglietto.findBigliettoByTempo", Long.class).setParameter("data1", data1).setParameter("data2", data2).getSingleResult().longValue();
     }
 }

@@ -1,5 +1,6 @@
 package it.epicode.entities.mezzi;
 
+import it.epicode.dao.TitoliDiViaggioDAO;
 import it.epicode.entities.titoli_di_viaggio.Biglietto;
 import it.epicode.entities.tratte.Tratta;
 import it.epicode.enums.InServizio;
@@ -144,6 +145,8 @@ public abstract class Mezzo {
     }
     public void timbraBigliettoDaId(Biglietto biglietto){
         if (biglietto.isValidita()) {
+            EntityManager em = null;
+            TitoliDiViaggioDAO tdvDAO = new TitoliDiViaggioDAO(em);
             Scanner sc = new Scanner(System.in);
             biglietto.timbraBiglietto();
             setNumeroBigliettiVidimati(getNumeroBigliettiVidimati() + 1);
@@ -157,6 +160,8 @@ public abstract class Mezzo {
             int giorno = sc.nextInt();
             sc.nextLine();
             biglietto.setDataTimbro(LocalDate.of(anno, mese, giorno));
+            tdvDAO.update(biglietto);
+
 
         } else {
             System.out.println("biglietto non valido scendi subito stronzo");

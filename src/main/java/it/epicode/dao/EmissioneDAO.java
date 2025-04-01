@@ -29,7 +29,7 @@ public class EmissioneDAO {
             System.out.println(e.getMessage());
         }
     }
-    public static Emissione getById(Long id) {
+    public Emissione getById(Long id) {
         return em.find(Emissione.class, id);
     }
     public void delete(Emissione emissione) {
@@ -62,7 +62,7 @@ public class EmissioneDAO {
         em.merge(emissione);
     }
 
-    public static void vendiTitoloDiViaggio() {
+    public void vendiTitoloDiViaggio() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Seleziona l'operazione da effettuare: ");
         System.out.println("1. Acquista un abbonamento");
