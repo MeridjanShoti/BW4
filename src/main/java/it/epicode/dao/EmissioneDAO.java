@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class EmissioneDAO {
     private static EntityManager em;
-    private PersoneDAO utenteDAO = new PersoneDAO(em);
+    private static PersoneDAO utenteDAO = new PersoneDAO(em);
     private static TitoliDiViaggioDAO tdvDAO = new TitoliDiViaggioDAO(em);
 
     public EmissioneDAO(EntityManager em) {
@@ -80,14 +80,14 @@ public class EmissioneDAO {
                 int durata = scanner.nextInt();
                 scanner.nextLine();
                 DurataValidita durataValidita = null;
-                switch (durata){
+                switch (durata) {
                     case 1:
                         durataValidita = DurataValidita.SETTIMANALE;
                         break;
                     case 2:
                         durataValidita = DurataValidita.MENSILE;
                         break;
-                        default:
+                    default:
                         System.out.println("Scelta non valida");
                 }
                 System.out.println("inserisci l'anno corrente");
@@ -105,7 +105,7 @@ public class EmissioneDAO {
                 System.out.println("inserisci l'id della tessera: ");
                 long idTessera = scanner.nextLong();
                 scanner.nextLine();
-                TitoloDiViaggio abbonamento = new Abbonamento(durataValidita,LocalDate.of(anno, mese, giorno), getById(codiceEmissione), (Tessera) tdvDAO.getById(idTessera));
+                TitoloDiViaggio abbonamento = new Abbonamento(durataValidita, LocalDate.of(anno, mese, giorno), getById(codiceEmissione), (Tessera) tdvDAO.getById(idTessera));
                 try {
                     tdvDAO.save(abbonamento);
                 } catch (Exception e) {
@@ -125,7 +125,7 @@ public class EmissioneDAO {
                 System.out.println("Inserisci il codice id dell'emissione: ");
                 long codiceEmissione2 = scanner.nextLong();
                 scanner.nextLine();
-                TitoloDiViaggio  biglietto = new Biglietto(LocalDate.of(anno2, mese2, giorno2), getById(codiceEmissione2));
+                TitoloDiViaggio biglietto = new Biglietto(LocalDate.of(anno2, mese2, giorno2), getById(codiceEmissione2));
                 break;
             case 4:
                 System.out.println("Hai selezionato: Esci");
@@ -133,6 +133,16 @@ public class EmissioneDAO {
             default:
                 System.out.println("Scelta non valida");
                 break;
+
         }
     }
-}
+        public boolean titoloValido (){
+            return false;
+        }
+
+        public void controllaValidita (){
+
+        }
+
+    }
+

@@ -45,22 +45,6 @@ public abstract class Emissione {
     public void setCitta(String citta) {
         this.citta = citta;
     }
-
-    public boolean titoloValido (){
-        return false;
-    }
-    public void vendiTitolo (){
-
-    }
-    public void vendiTessera (){
-
-    }
-    public void controllaValidita (){
-
-    }
-    public void caricaAbbonamento (){
-
-    }
     @Override
     public String toString() {
         return "[id: " + id  + "\nLuogo di emissione: " + citta + "\ntitoli venduti: " + conteggioTitoli+ "]";

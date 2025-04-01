@@ -69,7 +69,7 @@ public class MainATAC {
 
         List<TitoloDiViaggio> titoliDiViaggio = List.of(biglietto, biglietto2, tessera, tessera2, tessera3, tessera4, tessera5, tessera6, tessera7, tessera8, tessera9, tessera10);
 
-        /*TitoloDiViaggio abbonamento = new Abbonamento(DurataValidita.MENSILE, LocalDate.of(2024, 12, 31), emissione3, (Tessera) tessera);
+        TitoloDiViaggio abbonamento = new Abbonamento(DurataValidita.MENSILE, LocalDate.of(2024, 12, 31), emissione3, (Tessera) tessera);
         TitoloDiViaggio abbonamento2 = new Abbonamento(DurataValidita.SETTIMANALE, LocalDate.of(2025, 3, 31), emissione2, (Tessera) tessera2);
         TitoloDiViaggio abbonamento3 = new Abbonamento(DurataValidita.MENSILE, LocalDate.of(2025, 3, 31), emissione3, (Tessera) tessera3);
         TitoloDiViaggio abbonamento4 = new Abbonamento(DurataValidita.SETTIMANALE, LocalDate.of(2025, 3, 31), emissione, (Tessera) tessera4);
@@ -77,9 +77,9 @@ public class MainATAC {
         TitoloDiViaggio abbonamento6 = new Abbonamento(DurataValidita.SETTIMANALE, LocalDate.of(2025, 3, 31), emissione2, (Tessera) tessera6);
         TitoloDiViaggio abbonamento7 = new Abbonamento(DurataValidita.MENSILE, LocalDate.of(2025, 3, 31), emissione3, (Tessera) tessera7);
         TitoloDiViaggio abbonamento8 = new Abbonamento(DurataValidita.SETTIMANALE, LocalDate.of(2025, 3, 31), emissione3, (Tessera) tessera8);
-        TitoloDiViaggio abbonamento9 = new Abbonamento(DurataValidita.MENSILE, LocalDate.of(2025, 3, 31), emissione, (Tessera) tessera9);*/
+        TitoloDiViaggio abbonamento9 = new Abbonamento(DurataValidita.MENSILE, LocalDate.of(2025, 3, 31), emissione, (Tessera) tessera9);
 
-        /*List<TitoloDiViaggio> titoliDiViaggio2 = List.of(abbonamento, abbonamento2, abbonamento3, abbonamento4, abbonamento5, abbonamento6, abbonamento7, abbonamento8, abbonamento9);*/
+        List<TitoloDiViaggio> titoliDiViaggio2 = List.of(abbonamento, abbonamento2, abbonamento3, abbonamento4, abbonamento5, abbonamento6, abbonamento7, abbonamento8, abbonamento9);
 
         Tratta tratta = new Tratta( "Roma", "Milano", 200, null);
         Tratta tratta2 = new Tratta("Milano", "Torino", 300, null);
@@ -101,7 +101,7 @@ public class MainATAC {
         utenti.forEach(personeDAO::saveNoTx);
         emissioni.forEach(emissioneDAO::saveNoTx);
         titoliDiViaggio.forEach(titoliDiViaggioDAO::saveNoTx);
-        /*titoliDiViaggio2.forEach(titoliDiViaggioDAO::saveNoTx);*/
+        titoliDiViaggio2.forEach(titoliDiViaggioDAO::saveNoTx);
         tratte.forEach(trattaDAO::saveNoTx);
         mezzi.forEach(mezzoDAO::saveNoTx);
         em.getTransaction().commit();
