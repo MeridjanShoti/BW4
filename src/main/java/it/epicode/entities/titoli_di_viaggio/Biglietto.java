@@ -46,10 +46,6 @@ public class Biglietto extends TitoloDiViaggio {
         this.mezzo = mezzo;
     }
 
-    @Override
-    public String toString() {
-        return "[id: " +getId() +  "\nvalidita biglietto: " + validita + "\nemissione: " + getLuogoEmissione().getCitta() + "\ndata emissione: " + getDataEmissione() + "]";
-    }
     public void timbraBiglietto() {
         this.validita = false;
     }

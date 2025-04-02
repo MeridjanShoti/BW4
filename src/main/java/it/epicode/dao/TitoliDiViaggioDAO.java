@@ -1,10 +1,7 @@
 package it.epicode.dao;
 
 import it.epicode.entities.mezzi.Mezzo;
-import it.epicode.entities.titoli_di_viaggio.Abbonamento;
-import it.epicode.entities.titoli_di_viaggio.Biglietto;
-import it.epicode.entities.titoli_di_viaggio.Tessera;
-import it.epicode.entities.titoli_di_viaggio.TitoloDiViaggio;
+import it.epicode.entities.titoli_di_viaggio.*;
 import jakarta.persistence.EntityManager;
 
 import java.time.LocalDate;
@@ -59,7 +56,7 @@ public class TitoliDiViaggioDAO {
         else return !abbonamento.getDataScadenza().isBefore(LocalDate.now());
     }
     // titoli_di_viaggio.CountByPuntoVenditaEData
-    public Object[] countByPVEData(LocalDate data1, LocalDate data2) {
-        return em.createNamedQuery("TitoloDiViaggio.CountByPuntoVenditaEData", Object[].class).setParameter("data1", data1).setParameter("data2", data2).getResultStream().toArray();
+    public List<ConteggioByPuntoVenditaEData> countByPVEData(LocalDate data1, LocalDate data2) {
+        return em.createNamedQuery("TitoloDiViaggio.CountByPuntoVenditaEData", ConteggioByPuntoVenditaEData.class).setParameter("data1", data1).setParameter("data2", data2).getResultStream().toList();
     }
 }
