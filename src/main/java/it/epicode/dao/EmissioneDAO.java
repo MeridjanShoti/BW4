@@ -108,6 +108,7 @@ public class EmissioneDAO {
                 TitoloDiViaggio abbonamento = new Abbonamento(durataValidita, LocalDate.of(anno, mese, giorno), getById(codiceEmissione), (Tessera) tdvDAO.getById(idTessera));
                 try {
                     tdvDAO.save(abbonamento);
+                    System.out.println("Abbonamento acquistato con successo!");
                 } catch (Exception e) {
                     tdvDAO.update(abbonamento);
                 }
@@ -128,6 +129,7 @@ public class EmissioneDAO {
                 TitoloDiViaggio biglietto = new Biglietto(LocalDate.of(anno2, mese2, giorno2), getById(codiceEmissione2));
                 try {
                     tdvDAO.save(biglietto);
+                    System.out.println("Biglietto acquistato con successo!");
                 } catch (Exception e) {
                     tdvDAO.update(biglietto);
                 }
