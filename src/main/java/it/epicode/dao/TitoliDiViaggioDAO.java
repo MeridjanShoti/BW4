@@ -1,6 +1,9 @@
 package it.epicode.dao;
 
+import it.epicode.entities.mezzi.Mezzo;
+import it.epicode.entities.titoli_di_viaggio.Abbonamento;
 import it.epicode.entities.titoli_di_viaggio.Biglietto;
+import it.epicode.entities.titoli_di_viaggio.Tessera;
 import it.epicode.entities.titoli_di_viaggio.TitoloDiViaggio;
 import jakarta.persistence.EntityManager;
 
@@ -45,5 +48,17 @@ public class TitoliDiViaggioDAO {
     }
     public Long findBigliettoByTempo(LocalDate data1, LocalDate data2) {
         return em.createNamedQuery("Biglietto.findBigliettoByTempo", Long.class).setParameter("data1", data1).setParameter("data2", data2).getSingleResult().longValue();
+    }
+    public Long countBigliettiByMezzo(Mezzo mezzo) {
+        return em.createNamedQuery("Biglietto.countBigliettiByMezzo", Long.class).setParameter("mezzo", mezzo).getSingleResult().longValue();
+    }
+    public boolean checkAbbonamentoByTessera (Tessera tessera) {
+        Abbonamento abbonamento = em.createNamedQuery("Abbonamento.checkValiditaByTessera", Abbonamento.class).setParameter("tessera", tessera).getSingleResult();
+        if (abbonamento == null) return false;
+        else return !abbonamento.getDataScadenza().isBefore(LocalDate.now());
+    }
+    // titoli_di_viaggio.CountByPuntoVenditaEData
+    public Object[] countByPVEData(LocalDate data1, LocalDate data2) {
+        return em.createNamedQuery("TitoloDiViaggio.CountByPuntoVenditaEData", Object[].class).setParameter("data1", data1).setParameter("data2", data2).getResultStream().toArray();
     }
 }

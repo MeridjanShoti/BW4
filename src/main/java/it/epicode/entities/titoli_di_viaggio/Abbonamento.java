@@ -2,15 +2,13 @@ package it.epicode.entities.titoli_di_viaggio;
 
 import it.epicode.entities.emissioni.Emissione;
 import it.epicode.enums.DurataValidita;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
+@NamedQuery(name = "Abbonamento.checkValiditaByTessera", query = "SELECT a FROM Abbonamento a WHERE a.tessera = :tessera")
 public class Abbonamento extends TitoloDiViaggio {
     @Enumerated(EnumType.STRING)
     private DurataValidita durataValidita;

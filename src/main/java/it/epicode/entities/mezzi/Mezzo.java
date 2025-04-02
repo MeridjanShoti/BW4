@@ -143,28 +143,5 @@ public abstract class Mezzo {
         System.out.println("tempo percorrenza effettivo: " + this.getTempoEffettivoPercorrenza() + " minuti");
         System.out.println("tempo percorrenza medio: " + this.getMediaTempoPercorsi() + " minuti");
     }
-    public void timbraBigliettoDaId(Biglietto biglietto){
-        if (biglietto.isValidita()) {
-            EntityManager em = null;
-            TitoliDiViaggioDAO tdvDAO = new TitoliDiViaggioDAO(em);
-            Scanner sc = new Scanner(System.in);
-            biglietto.timbraBiglietto();
-            setNumeroBigliettiVidimati(getNumeroBigliettiVidimati() + 1);
-            System.out.println("che anno è?");
-            int anno = sc.nextInt();
-            sc.nextLine();
-            System.out.println("che mese è?");
-            int mese = sc.nextInt();
-            sc.nextLine();
-            System.out.println("che giorno è?");
-            int giorno = sc.nextInt();
-            sc.nextLine();
-            biglietto.setDataTimbro(LocalDate.of(anno, mese, giorno));
-            tdvDAO.update(biglietto);
 
-
-        } else {
-            System.out.println("biglietto non valido scendi subito stronzo");
-        }
-    }
 }

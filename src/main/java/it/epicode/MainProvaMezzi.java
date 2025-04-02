@@ -38,15 +38,6 @@ public class MainProvaMezzi {
         em.persist(biglietto);
         em.persist(biglietto2);
         em.getTransaction().commit();
-        System.out.println(biglietto.getId());
-        autobus.timbraBigliettoDaId((Biglietto) biglietto);
-        System.out.println(autobus.toString());
-        System.out.println(biglietto.toString());
-        autobus.timbraBigliettoDaId((Biglietto) biglietto);
-        System.out.println(autobus.toString());
-        autobus.timbraBigliettoDaId((Biglietto) biglietto2);
-        System.out.println(autobus.toString());
-        Long conteggio = titoliDiViaggioDAO.findBigliettoByTempo(LocalDate.now().minusDays(1), LocalDate.now().plusDays(1));
-        System.out.println(conteggio);
+        
     }
 }

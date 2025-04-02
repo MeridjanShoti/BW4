@@ -3,6 +3,7 @@ package it.epicode.entities.titoli_di_viaggio;
 import it.epicode.entities.emissioni.Emissione;
 import it.epicode.entities.persone.Utente;
 import jakarta.persistence.Entity;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 

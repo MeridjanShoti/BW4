@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Table (name = "titoli_di_viaggio")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_titolo_di_viaggio")
+@NamedQuery(name = "TitoloDiViaggio.CountByPuntoVenditaEData", query = "SELECT t.luogoEmissione, COUNT (t) FROM TitoloDiViaggio t WHERE TYPE(t) != 'Tessera'  AND (t.dataEmissione BETWEEN :data1 AND :data2) GROUP BY t.luogoEmissione")
 public abstract class TitoloDiViaggio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
