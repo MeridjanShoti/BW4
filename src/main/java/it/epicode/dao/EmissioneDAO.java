@@ -12,12 +12,14 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class EmissioneDAO {
-    private static EntityManager em;
-    private static UtenteDAO utenteDAO = new UtenteDAO(em);
-    private static TitoliDiViaggioDAO tdvDAO = new TitoliDiViaggioDAO(em);
+    private  EntityManager em;
+    private  UtenteDAO utenteDAO = new UtenteDAO(em);
+    private  TitoliDiViaggioDAO tdvDAO = new TitoliDiViaggioDAO(em);
 
     public EmissioneDAO(EntityManager em) {
         this.em = em;
+        this.utenteDAO = new UtenteDAO(em);
+        this.tdvDAO = new TitoliDiViaggioDAO(em);
     }
     public void save(Emissione emissione) {
         try {

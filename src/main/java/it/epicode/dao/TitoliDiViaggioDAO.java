@@ -13,6 +13,7 @@ import java.util.List;
 public class TitoliDiViaggioDAO {
     private  EntityManager em;
 
+
     public TitoliDiViaggioDAO(EntityManager em) {
         this.em = em;
     }
