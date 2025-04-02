@@ -18,8 +18,6 @@ public class EmissioneDAO {
 
     public EmissioneDAO(EntityManager em) {
         this.em = em;
-        this.utenteDAO = new UtenteDAO(em);
-        this.tdvDAO = new TitoliDiViaggioDAO(em);
     }
     public void save(Emissione emissione) {
         try {
