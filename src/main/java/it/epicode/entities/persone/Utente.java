@@ -4,7 +4,7 @@ import it.epicode.entities.titoli_di_viaggio.Tessera;
 import jakarta.persistence.*;
 
 @Entity
-@Table (name = "utenti")
+@Table(name = "utenti")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Utente {
     @Id
@@ -20,7 +20,9 @@ public class Utente {
         this.cognome = cognome;
         this.tessera = tessera;
     }
-    public Utente(){}
+
+    public Utente() {
+    }
 
     public Long getId() {
         return id;
@@ -53,6 +55,7 @@ public class Utente {
     public void setTessera(Tessera tessera) {
         this.tessera = tessera;
     }
+
     @Override
     public String toString() {
         return "[Nome: " + getNome() + "\nCognome: " + getCognome() + "\nTessera: " + getTessera() + "\nid: " + getId() + "]";

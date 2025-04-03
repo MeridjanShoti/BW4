@@ -14,7 +14,7 @@ public class Tratta {
     private String partenza;
     private String capolinea;
     private int tempoPercorrenzaPrevisto;
-    @OneToMany (mappedBy = "tratta")
+    @OneToMany(mappedBy = "tratta")
     private List<Mezzo> mezzi;
 
     public Tratta(String partenza, String capolinea, int tempoPercorrenzaPrevisto, List<Mezzo> mezzi) {
@@ -23,7 +23,8 @@ public class Tratta {
         this.tempoPercorrenzaPrevisto = tempoPercorrenzaPrevisto;
         this.mezzi = mezzi;
     }
-    public Tratta (){
+
+    public Tratta() {
 
     }
 
@@ -66,6 +67,7 @@ public class Tratta {
     public void setMezzi(List<Mezzo> mezzi) {
         this.mezzi = mezzi;
     }
+
     @Override
     public String toString() {
         return "[id: " + id + "\npartenza: " + partenza + "\ncapolinea: " + capolinea + "\ntempo percorrenza previsto: " + tempoPercorrenzaPrevisto + "]";

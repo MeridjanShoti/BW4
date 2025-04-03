@@ -21,7 +21,7 @@ public class ConteggioByPuntoVenditaEData {
         this.luogoEmissione = LuogoEmissione;
     }
 
-    public ConteggioByPuntoVenditaEData( Long luogoEmissione, Long count) {
+    public ConteggioByPuntoVenditaEData(Long luogoEmissione, Long count) {
         this.count = count;
         this.luogoEmissione = luogoEmissione;
     }
@@ -31,7 +31,7 @@ public class ConteggioByPuntoVenditaEData {
 
     @Override
     public String toString() {
-        return "LuogoEmissione = " + luogoEmissione +", count = " + count;
+        return "LuogoEmissione = " + luogoEmissione + ", count = " + count;
     }
 
 

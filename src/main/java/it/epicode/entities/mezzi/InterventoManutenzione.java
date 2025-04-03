@@ -1,7 +1,10 @@
 package it.epicode.entities.mezzi;
+
 import jakarta.persistence.*;
 import jakarta.persistence.GenerationType;
+
 import java.time.LocalDate;
+
 @Entity
 public class InterventoManutenzione {
     @Id
@@ -17,6 +20,7 @@ public class InterventoManutenzione {
         this.fineManutenzione = fineManutenzione;
         this.mezzoInManutenzione = mezzoInManutenzione;
     }
+
     public InterventoManutenzione() {
     }
 
@@ -43,11 +47,20 @@ public class InterventoManutenzione {
     public void setMezzoInManutenzione(Mezzo mezzoInManutenzione) {
         this.mezzoInManutenzione = mezzoInManutenzione;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "inizioManutenzione=" + inizioManutenzione +
                 ", fineManutenzione=" + fineManutenzione +
-                ", mezzoInManutenzione=" + mezzoInManutenzione ;
+                ", mezzoInManutenzione=" + mezzoInManutenzione;
     }
 
 }

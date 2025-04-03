@@ -8,33 +8,41 @@ import java.time.LocalDate;
 
 public class UtenteDAO {
     private EntityManager em;
+
     public UtenteDAO(EntityManager em) {
         this.em = em;
     }
+
     public void save(Utente persona) {
         em.getTransaction().begin();
         em.persist(persona);
         em.getTransaction().commit();
     }
+
     public Utente getById(int id) {
         return em.find(Utente.class, id);
     }
+
     public void update(Utente persona) {
         em.getTransaction().begin();
         em.merge(persona);
         em.getTransaction().commit();
     }
+
     public void delete(Utente persona) {
         em.getTransaction().begin();
         em.remove(persona);
         em.getTransaction().commit();
     }
+
     public void updateNoTx(Utente persona) {
         em.merge(persona);
     }
+
     public void deleteNoTx(Utente persona) {
         em.remove(persona);
     }
+
     public void saveNoTx(Utente persona) {
         em.persist(persona);
     }
@@ -51,7 +59,7 @@ public class UtenteDAO {
         System.out.println("id: " + utente.getId());
     }
 
-    public void creaTessera(Utente utente, LocalDate  dataEmissione) {
+    public void creaTessera(Utente utente, LocalDate dataEmissione) {
         Tessera tessera = new Tessera();
         tessera.setUtente(utente);
         tessera.setDataEmissione(dataEmissione);
@@ -65,8 +73,6 @@ public class UtenteDAO {
         System.out.println("id: " + tessera.getId());
         update(utente);
     }
-
-
 
 
 }

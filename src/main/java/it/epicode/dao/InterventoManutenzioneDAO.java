@@ -2,7 +2,6 @@ package it.epicode.dao;
 
 import it.epicode.entities.mezzi.InterventoManutenzione;
 import it.epicode.entities.mezzi.Mezzo;
-import it.epicode.enums.InServizio;
 import jakarta.persistence.EntityManager;
 
 import java.time.LocalDate;
@@ -10,9 +9,11 @@ import java.time.LocalDate;
 
 public class InterventoManutenzioneDAO {
     private EntityManager em;
+
     public InterventoManutenzioneDAO(EntityManager em) {
         this.em = em;
     }
+
     public void save(InterventoManutenzione interventoManutenzione) {
         try {
             em.getTransaction().begin();
@@ -23,6 +24,7 @@ public class InterventoManutenzioneDAO {
             System.out.println(e.getMessage());
         }
     }
+
     public void delete(InterventoManutenzione interventoManutenzione) {
         try {
             em.getTransaction().begin();
@@ -34,6 +36,7 @@ public class InterventoManutenzioneDAO {
         }
 
     }
+
     public void update(InterventoManutenzione interventoManutenzione) {
         try {
             em.getTransaction().begin();
@@ -44,23 +47,29 @@ public class InterventoManutenzioneDAO {
             System.out.println(e.getMessage());
         }
     }
+
     public InterventoManutenzione getById(int id) {
         return em.find(InterventoManutenzione.class, id);
     }
+
     public void saveNoTx(InterventoManutenzione interventoManutenzione) {
         em.persist(interventoManutenzione);
     }
+
     public void deleteNoTx(InterventoManutenzione interventoManutenzione) {
         em.remove(interventoManutenzione);
     }
+
     public void updateNoTx(InterventoManutenzione interventoManutenzione) {
         em.merge(interventoManutenzione);
     }
+
     public void iniziaManutenzione(InterventoManutenzione interventoManutenzione, LocalDate inizioManutenzione, Mezzo mezzo) {
         interventoManutenzione.setInizioManutenzione(inizioManutenzione);
         interventoManutenzione.setMezzoInManutenzione(mezzo);
         update(interventoManutenzione);
     }
+
     public void finisciManutenzione(InterventoManutenzione interventoManutenzione, LocalDate localDate) {
         interventoManutenzione.setFineManutenzione(localDate);
         update(interventoManutenzione);

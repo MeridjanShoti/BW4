@@ -1,15 +1,10 @@
 package it.epicode.entities.mezzi;
 
-import it.epicode.dao.TitoliDiViaggioDAO;
-import it.epicode.entities.titoli_di_viaggio.Biglietto;
 import it.epicode.entities.tratte.Tratta;
-import it.epicode.enums.InServizio;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 @Entity
 @Table(name = "mezzi")
@@ -29,10 +24,11 @@ public abstract class Mezzo {
     private int totaleTempoPercorso = 0;
     private List<Integer> tempiEffettivi = new ArrayList<>();
     double mediaTempoPercorsi;
+
     public void parti() {
 
         numeroRipetizioniPercorso++;
-        setTempoEffettivoPercorrenza(20+ ((int)(Math.random() * 40)));
+        setTempoEffettivoPercorrenza(20 + ((int) (Math.random() * 40)));
         tempiEffettivi.add(tempoEffettivoPercorrenza);
         setTotaleTempoPercorso(totaleTempoPercorso + tempoEffettivoPercorrenza);
 
@@ -65,7 +61,6 @@ public abstract class Mezzo {
     public void setCapienza(int capienza) {
         this.capienza = capienza;
     }
-
 
 
     public int getNumeroBigliettiVidimati() {
@@ -117,7 +112,6 @@ public abstract class Mezzo {
     }
 
 
-
     public int getTempoEffettivoPercorrenza() {
         return tempoEffettivoPercorrenza;
     }
@@ -128,8 +122,9 @@ public abstract class Mezzo {
 
     @Override
     public String toString() {
-        return "[id: " + id + "\ncapienza: " + capienza + "\nin servizio: " + "\nnumero biglietti vidimati: " + numeroBigliettiVidimati + "]";
+        return "[id: " + id + "\ncapienza: " + capienza + "\nnumero biglietti vidimati: " + numeroBigliettiVidimati + "]";
     }
+
     public void dettagliPercorsiMezzo() {
         System.out.println("percorso fatto " + this.getNumeroRipetizioniPercorso() + " volte");
         System.out.println("tempo percorrenza effettivo: " + this.getTempoEffettivoPercorrenza() + " minuti");

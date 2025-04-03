@@ -10,7 +10,6 @@ import it.epicode.entities.mezzi.Autobus;
 import it.epicode.entities.titoli_di_viaggio.Biglietto;
 import it.epicode.entities.titoli_di_viaggio.TitoloDiViaggio;
 import it.epicode.entities.tratte.Tratta;
-import it.epicode.enums.InServizio;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -22,7 +21,6 @@ public class MainProvaMezzi {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("ATAC");
         EntityManager em = emf.createEntityManager();
-        TitoliDiViaggioDAO titoliDiViaggioDAO = new TitoliDiViaggioDAO(em);
         EmissioneDAO emissioneDAO = new EmissioneDAO(em);
         TrattaDAO trattaDAO = new TrattaDAO(em);
         MezzoDAO mezzoDAO = new MezzoDAO(em);

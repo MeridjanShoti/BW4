@@ -1,6 +1,5 @@
 package it.epicode.dao;
 
-import it.epicode.entities.emissioni.Emissione;
 import it.epicode.entities.tratte.Tratta;
 import jakarta.persistence.EntityManager;
 

@@ -20,7 +20,9 @@ public abstract class Emissione {
     public Emissione(String luogoEmissione) {
         this.citta = luogoEmissione;
     }
-    public Emissione (){}
+
+    public Emissione() {
+    }
 
     public Long getId() {
         return id;
@@ -45,8 +47,9 @@ public abstract class Emissione {
     public void setCitta(String citta) {
         this.citta = citta;
     }
+
     @Override
     public String toString() {
-        return "[id: " + id  + "\nLuogo di emissione: " + citta + "\ntitoli venduti: " + conteggioTitoli+ "]";
+        return "[id: " + id + "\nLuogo di emissione: " + citta + "\ntitoli venduti: " + conteggioTitoli + "]";
     }
 }

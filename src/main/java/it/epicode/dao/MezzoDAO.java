@@ -2,9 +2,11 @@ package it.epicode.dao;
 
 import it.epicode.entities.mezzi.Mezzo;
 import it.epicode.entities.titoli_di_viaggio.Biglietto;
+import it.epicode.exceptions.ErroreDiInserimentoException;
 import jakarta.persistence.EntityManager;
 
 import java.time.LocalDate;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MezzoDAO {
@@ -55,17 +57,39 @@ public class MezzoDAO {
             biglietto.timbraBiglietto();
             mezzo.setNumeroBigliettiVidimati(mezzo.getNumeroBigliettiVidimati() + 1);
             System.out.println("che anno è?");
-            int anno = sc.nextInt();
-            sc.nextLine();
+            int anno = 0;
+            try {
+                anno = sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("dovevi inserire un numero!");
+            } finally {
+                sc.nextLine();
+            }
             System.out.println("che mese è?");
-            int mese = sc.nextInt();
-            sc.nextLine();
+            int mese = 0;
+            try {
+                mese = sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("dovevi inserire un numero!");
+            } finally {
+                sc.nextLine();
+            }
             System.out.println("che giorno è?");
-            int giorno = sc.nextInt();
-            sc.nextLine();
-            biglietto.setDataTimbro(LocalDate.of(anno, mese, giorno));
-            biglietto.setMezzo(mezzo);
-            bigliettoDAO.update(biglietto);
+            int giorno = 0;
+            try {
+                giorno = sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("dovevi inserire un numero!");
+            } finally {
+                sc.nextLine();
+            }
+            try {
+                biglietto.setDataTimbro(LocalDate.of(anno, mese, giorno));
+                biglietto.setMezzo(mezzo);
+                bigliettoDAO.update(biglietto);
+            } catch (ErroreDiInserimentoException e) {
+                System.out.println(e.getMessage());
+            }
         } else {
             System.out.println("biglietto non valido scendi subito");
         }

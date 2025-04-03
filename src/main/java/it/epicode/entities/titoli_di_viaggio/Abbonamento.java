@@ -5,7 +5,6 @@ import it.epicode.enums.DurataValidita;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @NamedQuery(name = "Abbonamento.checkValiditaByTessera", query = "SELECT a FROM Abbonamento a WHERE a.tessera = :tessera")
@@ -26,7 +25,9 @@ public class Abbonamento extends TitoloDiViaggio {
         }
         this.tessera = tessera;
     }
-    public Abbonamento (){}
+
+    public Abbonamento() {
+    }
 
     public DurataValidita getDurataValidita() {
         return durataValidita;
@@ -51,9 +52,10 @@ public class Abbonamento extends TitoloDiViaggio {
     public void setTessera(Tessera tessera) {
         this.tessera = tessera;
     }
+
     @Override
     public String toString() {
-        return "[id: " +getId() +  "\nDurata Validita: " + durataValidita + "\nData Scadenza: " + dataScadenza + "\nData Emissione: " + getDataEmissione() + "\nLuogo Emissione: " + getLuogoEmissione().getCitta() + "]";
+        return "[id: " + getId() + "\nDurata Validita: " + durataValidita + "\nData Scadenza: " + dataScadenza + "\nData Emissione: " + getDataEmissione() + "\nLuogo Emissione: " + getLuogoEmissione().getCitta() + "]";
     }
 
 

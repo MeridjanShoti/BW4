@@ -5,7 +5,6 @@ import it.epicode.entities.emissioni.DistributoreAutomatico;
 import it.epicode.entities.emissioni.Emissione;
 import it.epicode.entities.emissioni.Rivenditore;
 import it.epicode.entities.mezzi.Autobus;
-import it.epicode.entities.mezzi.InterventoManutenzione;
 import it.epicode.entities.mezzi.Mezzo;
 import it.epicode.entities.mezzi.Tram;
 import it.epicode.entities.persone.Utente;
@@ -55,14 +54,14 @@ public class MainCreazione {
         TitoloDiViaggio biglietto = new Biglietto(LocalDate.of(2023, 12, 31), emissione3);
         TitoloDiViaggio biglietto2 = new Biglietto(LocalDate.of(2023, 12, 31), emissione2);
         TitoloDiViaggio tessera1 = new Tessera(LocalDate.of(2025, 1, 31), emissione, utente1);
-        TitoloDiViaggio tessera2 = new Tessera(LocalDate.of(2025, 1, 31), emissione2,  utente2);
-        TitoloDiViaggio tessera3 = new Tessera(LocalDate.of(2025, 1, 31), emissione3,  utente3);
-        TitoloDiViaggio tessera4 = new Tessera(LocalDate.of(2025, 1, 31), emissione2,  utente4);
-        TitoloDiViaggio tessera5 = new Tessera(LocalDate.of(2025, 1, 31), emissione,  utente5);
+        TitoloDiViaggio tessera2 = new Tessera(LocalDate.of(2025, 1, 31), emissione2, utente2);
+        TitoloDiViaggio tessera3 = new Tessera(LocalDate.of(2025, 1, 31), emissione3, utente3);
+        TitoloDiViaggio tessera4 = new Tessera(LocalDate.of(2025, 1, 31), emissione2, utente4);
+        TitoloDiViaggio tessera5 = new Tessera(LocalDate.of(2025, 1, 31), emissione, utente5);
         TitoloDiViaggio tessera6 = new Tessera(LocalDate.of(2025, 1, 31), emissione2, utente6);
         TitoloDiViaggio tessera7 = new Tessera(LocalDate.of(2025, 1, 31), emissione3, utente7);
-        TitoloDiViaggio tessera8 = new Tessera(LocalDate.of(2025, 1, 31), emissione3,  utente8);
-        TitoloDiViaggio tessera9 = new Tessera(LocalDate.of(2025, 1, 31), emissione2,  utente9);
+        TitoloDiViaggio tessera8 = new Tessera(LocalDate.of(2025, 1, 31), emissione3, utente8);
+        TitoloDiViaggio tessera9 = new Tessera(LocalDate.of(2025, 1, 31), emissione2, utente9);
         TitoloDiViaggio tessera10 = new Tessera(LocalDate.of(2023, 12, 31), emissione4, utente10);
 
         List<TitoloDiViaggio> titoliDiViaggio = List.of(biglietto, biglietto2, tessera1, tessera2, tessera3, tessera4, tessera5, tessera6, tessera7, tessera8, tessera9, tessera10);
@@ -79,7 +78,7 @@ public class MainCreazione {
 
         List<TitoloDiViaggio> titoliDiViaggio2 = List.of(abbonamento, abbonamento2, abbonamento3, abbonamento4, abbonamento5, abbonamento6, abbonamento7, abbonamento8, abbonamento9);
 
-        Tratta tratta = new Tratta( "Roma", "Milano", 60, null);
+        Tratta tratta = new Tratta("Roma", "Milano", 60, null);
         Tratta tratta2 = new Tratta("Milano", "Torino", 46, null);
         Tratta tratta3 = new Tratta("Torino", "Roma", 37, null);
 
@@ -87,24 +86,16 @@ public class MainCreazione {
         List<Tratta> tratte = List.of(tratta, tratta2, tratta3);
 
 
-        Mezzo mezzo = new Autobus( tratta);
-        Mezzo  mezzo2 = new Autobus( tratta2);
-        Mezzo  mezzo3 = new Autobus( tratta);
-        Mezzo  mezzo4 = new Autobus( tratta3);
-        Mezzo  mezzo5 = new Tram( tratta);
-        Mezzo  mezzo6 = new Tram( tratta2);
-        Mezzo  mezzo7 = new Tram( tratta);
+        Mezzo mezzo = new Autobus(tratta);
+        Mezzo mezzo2 = new Autobus(tratta2);
+        Mezzo mezzo3 = new Autobus(tratta);
+        Mezzo mezzo4 = new Autobus(tratta3);
+        Mezzo mezzo5 = new Tram(tratta);
+        Mezzo mezzo6 = new Tram(tratta2);
+        Mezzo mezzo7 = new Tram(tratta);
 
         List<Mezzo> mezzi = List.of(mezzo, mezzo2, mezzo3, mezzo4, mezzo5, mezzo6, mezzo7);
 
-        InterventoManutenzione interventoManutenzione1 = new InterventoManutenzione();
-        InterventoManutenzione  interventoManutenzione2 = new InterventoManutenzione();
-        InterventoManutenzione  interventoManutenzione3 = new InterventoManutenzione();
-        InterventoManutenzione  interventoManutenzione4 = new InterventoManutenzione();
-        InterventoManutenzione  interventoManutenzione5 = new InterventoManutenzione();
-
-
-        List<InterventoManutenzione> interventi = List.of(interventoManutenzione1, interventoManutenzione2, interventoManutenzione3, interventoManutenzione4, interventoManutenzione5);
 
         em.getTransaction().begin();
         utenti.forEach(utenteDAO::saveNoTx);
@@ -113,15 +104,10 @@ public class MainCreazione {
         titoliDiViaggio2.forEach(titoliDiViaggioDAO::saveNoTx);
         tratte.forEach(trattaDAO::saveNoTx);
         mezzi.forEach(mezzoDAO::saveNoTx);
-        interventi.forEach(interventoManutenzioneDAO::saveNoTx);
+
         em.getTransaction().commit();
 
-        interventoManutenzioneDAO.iniziaManutenzione(interventoManutenzione1, LocalDate.of(2024, 12, 1), mezzo2);
-        interventoManutenzioneDAO.finisciManutenzione(interventoManutenzione1, LocalDate.of(2024, 12, 12));
-        interventoManutenzioneDAO.iniziaManutenzione(interventoManutenzione2, LocalDate.of(2025, 3, 5), mezzo3);
-        interventoManutenzioneDAO.finisciManutenzione(interventoManutenzione2, LocalDate.of(2025, 3, 10));
-        interventoManutenzioneDAO.iniziaManutenzione(interventoManutenzione3, LocalDate.of(2025, 12, 5), mezzo4);
-        interventoManutenzioneDAO.finisciManutenzione(interventoManutenzione3, LocalDate.of(2025, 12, 6));
+
         utente1.setTessera((Tessera) tessera1);
         utente2.setTessera((Tessera) tessera2);
         utente3.setTessera((Tessera) tessera3);
@@ -133,7 +119,7 @@ public class MainCreazione {
         utente9.setTessera((Tessera) tessera9);
         utente10.setTessera((Tessera) tessera10);
         em.getTransaction().begin();
-        interventi.forEach(interventoManutenzioneDAO::updateNoTx);
+
         mezzi.forEach(mezzoDAO::updateNoTx);
         utenti.forEach(utenteDAO::updateNoTx);
         emissioni.forEach(emissioneDAO::updateNoTx);

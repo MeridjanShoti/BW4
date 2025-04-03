@@ -3,9 +3,7 @@ package it.epicode.entities.titoli_di_viaggio;
 import it.epicode.entities.emissioni.Emissione;
 import it.epicode.entities.persone.Utente;
 import jakarta.persistence.Entity;
-import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 
@@ -14,7 +12,7 @@ public class Tessera extends TitoloDiViaggio {
     private LocalDate dataScadenza = getDataEmissione().plusYears(1);
     @OneToOne
     private Abbonamento abbonamento = null;
-    @OneToOne (mappedBy = "tessera")
+    @OneToOne(mappedBy = "tessera")
     private Utente utente;
 
     public Tessera(LocalDate dataEmissione, Emissione luogoEmissione, Utente utente) {
@@ -49,7 +47,6 @@ public class Tessera extends TitoloDiViaggio {
     public void setUtente(Utente utente) {
         this.utente = utente;
     }
-
 
 
     @Override

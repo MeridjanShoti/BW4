@@ -14,6 +14,7 @@ public class Biglietto extends TitoloDiViaggio {
     private LocalDate dataTimbro;
     @ManyToOne
     private Mezzo mezzo;
+
     public Biglietto(LocalDate dataEmissione, Emissione luogoEmissione) {
         super(dataEmissione, luogoEmissione);
     }

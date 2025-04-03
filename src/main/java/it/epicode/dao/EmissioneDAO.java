@@ -6,21 +6,24 @@ import it.epicode.entities.titoli_di_viaggio.Biglietto;
 import it.epicode.entities.titoli_di_viaggio.Tessera;
 import it.epicode.entities.titoli_di_viaggio.TitoloDiViaggio;
 import it.epicode.enums.DurataValidita;
+import it.epicode.exceptions.ErroreDiInserimentoException;
 import jakarta.persistence.EntityManager;
 
 import java.time.LocalDate;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class EmissioneDAO {
-    private  EntityManager em;
-    private  UtenteDAO utenteDAO;
-    private  TitoliDiViaggioDAO tdvDAO;
+    private EntityManager em;
+    private UtenteDAO utenteDAO;
+    private TitoliDiViaggioDAO tdvDAO;
 
     public EmissioneDAO(EntityManager em) {
         this.em = em;
         this.utenteDAO = new UtenteDAO(em);
         this.tdvDAO = new TitoliDiViaggioDAO(em);
     }
+
     public void save(Emissione emissione) {
         try {
             em.getTransaction().begin();
@@ -31,9 +34,11 @@ public class EmissioneDAO {
             System.out.println(e.getMessage());
         }
     }
+
     public Emissione getById(Long id) {
         return em.find(Emissione.class, id);
     }
+
     public void delete(Emissione emissione) {
         try {
             em.getTransaction().begin();
@@ -44,6 +49,7 @@ public class EmissioneDAO {
             System.out.println(e.getMessage());
         }
     }
+
     public void update(Emissione emissione) {
         try {
             em.getTransaction().begin();
@@ -54,12 +60,15 @@ public class EmissioneDAO {
             System.out.println(e.getMessage());
         }
     }
+
     public void saveNoTx(Emissione emissione) {
         em.persist(emissione);
     }
+
     public void deleteNoTx(Emissione emissione) {
         em.remove(emissione);
     }
+
     public void updateNoTx(Emissione emissione) {
         em.merge(emissione);
     }
@@ -70,15 +79,27 @@ public class EmissioneDAO {
         System.out.println("1. Acquista un abbonamento");
         System.out.println("2. Acquista un biglietto");
         System.out.println("0. Esci");
-        int scelta = scanner.nextInt();
-        scanner.nextLine();
+        int scelta = 0;
+        try {
+            scelta = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("dovevi inserire un numero!");
+        } finally {
+            scanner.nextLine();
+        }
         switch (scelta) {
             case 1:
                 System.out.println("Inserisci durata dell'abbonamento: ");
                 System.out.println("1. SETTIMANALE");
                 System.out.println("2. MENSILE");
-                int durata = scanner.nextInt();
-                scanner.nextLine();
+                int durata = 0;
+                try {
+                    durata = scanner.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("dovevi inserire un numero!");
+                } finally {
+                    scanner.nextLine();
+                }
                 DurataValidita durataValidita = null;
                 switch (durata) {
                     case 1:
@@ -91,46 +112,109 @@ public class EmissioneDAO {
                         System.out.println("Scelta non valida");
                 }
                 System.out.println("inserisci l'anno corrente");
-                int anno = scanner.nextInt();
-                scanner.nextLine();
+                int anno = 0;
+                try {
+                    anno = scanner.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("dovevi inserire un numero!");
+                } finally {
+                    scanner.nextLine();
+                }
                 System.out.println("inserisci il mese corrente");
-                int mese = scanner.nextInt();
-                scanner.nextLine();
+                int mese = 0;
+                try {
+                    mese = scanner.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("dovevi inserire un numero!");
+                } finally {
+                    scanner.nextLine();
+                }
                 System.out.println("inserisci il giorno corrente");
-                int giorno = scanner.nextInt();
-                scanner.nextLine();
+                int giorno = 0;
+                try {
+                    giorno = scanner.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("dovevi inserire un numero!");
+                } finally {
+                    scanner.nextLine();
+                }
                 System.out.println("inserisci il codice id dell'emissione: ");
-                long codiceEmissione = scanner.nextLong();
-                scanner.nextLine();
+                long codiceEmissione = 0;
+                try {
+                    codiceEmissione = scanner.nextLong();
+                } catch (Exception e) {
+                    System.out.println("dovevi inserire un numero!");
+                } finally {
+                    scanner.nextLine();
+                }
                 System.out.println("inserisci l'id della tessera: ");
-                long idTessera = scanner.nextLong();
-                scanner.nextLine();
+                long idTessera = 0;
+                try {
+                    idTessera = scanner.nextLong();
+                    scanner.nextLine();
+                } catch (InputMismatchException e) {
+                    System.out.println("dovevi inserire un numero!");
+                }
                 TitoloDiViaggio abbonamento = new Abbonamento(durataValidita, LocalDate.of(anno, mese, giorno), getById(codiceEmissione), (Tessera) tdvDAO.getById(idTessera));
                 try {
+                    if (anno == 0 || mese == 0 || giorno == 0 || codiceEmissione == 0 || idTessera == 0) {
+                        throw new ErroreDiInserimentoException("Errore nell'inserimento");
+                    }
                     tdvDAO.save(abbonamento);
-                    tdvDAO.update((Tessera) tdvDAO.getById(idTessera));
-                    System.out.println("Abbonamento acquistato con successo!");
+                    tdvDAO.update(tdvDAO.getById(idTessera));
+                    System.out.println("Abbonamento con id " + abbonamento.getId() + " acquistato con successo!");
+                } catch (ErroreDiInserimentoException e) {
+                    System.out.println(e.getMessage());
                 } catch (Exception e) {
                     System.out.println("Abbonamento non emesso");
                 }
                 break;
             case 2:
                 System.out.println("Inserisci l'anno corrente");
-                int anno2 = scanner.nextInt();
-                scanner.nextLine();
+                int anno2 = 0;
+                try {
+                    anno2 = scanner.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("dovevi inserire un numero!");
+                } finally {
+                    scanner.nextLine();
+                }
                 System.out.println("Inserisci il mese corrente");
-                int mese2 = scanner.nextInt();
-                scanner.nextLine();
+                int mese2 = 0;
+                try {
+                    mese2 = scanner.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("dovevi inserire un numero!");
+                } finally {
+                    scanner.nextLine();
+                }
                 System.out.println("Inserisci il giorno corrente");
-                int giorno2 = scanner.nextInt();
-                scanner.nextLine();
+                int giorno2 = 0;
+                try {
+                    giorno2 = scanner.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("dovevi inserire un numero!");
+                } finally {
+                    scanner.nextLine();
+                }
                 System.out.println("Inserisci il codice id dell'emissione: ");
-                long codiceEmissione2 = scanner.nextLong();
-                scanner.nextLine();
+                long codiceEmissione2 = 0;
+                try {
+                    codiceEmissione2 = scanner.nextLong();
+                } catch (Exception e) {
+                    System.out.println("dovevi inserire un numero!");
+                } finally {
+                    scanner.nextLine();
+                }
                 TitoloDiViaggio biglietto = new Biglietto(LocalDate.of(anno2, mese2, giorno2), getById(codiceEmissione2));
                 try {
+                    if (anno2 == 0 || mese2 == 0 || giorno2 == 0 || codiceEmissione2 == 0) {
+                        throw new ErroreDiInserimentoException("Errore nell'inserimento");
+                    }
                     tdvDAO.save(biglietto);
-                    System.out.println("Biglietto acquistato con successo!");
+                    System.out.println("Biglietto con id " + biglietto.getId() + " acquistato con successo!");
+                } catch (ErroreDiInserimentoException e) {
+                    System.out.println(e.getMessage());
                 } catch (Exception e) {
                     System.out.println("Biglietto non emesso");
                 }
@@ -146,10 +230,7 @@ public class EmissioneDAO {
     }
 
 
-
-
-
-    }
+}
 
 
 

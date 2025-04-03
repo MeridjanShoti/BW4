@@ -6,15 +6,17 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 
 @Entity
-public class DistributoreAutomatico extends Emissione{
-    @Enumerated (jakarta.persistence.EnumType.STRING)
+public class DistributoreAutomatico extends Emissione {
+    @Enumerated(jakarta.persistence.EnumType.STRING)
     private Attivita attivita;
 
     public DistributoreAutomatico(String luogoEmissione, Attivita attivita) {
         super(luogoEmissione);
         this.attivita = attivita;
     }
-    public DistributoreAutomatico (){}
+
+    public DistributoreAutomatico() {
+    }
 
     public Attivita getAttivita() {
         return attivita;
@@ -23,8 +25,9 @@ public class DistributoreAutomatico extends Emissione{
     public void setAttivita(Attivita attivita) {
         this.attivita = attivita;
     }
+
     @Override
     public String toString() {
-        return "[id: " + getId()  + "\nLuogo di emissione: " + getCitta() + "\ntitoli venduti:" + getConteggioTitoli()+ "\nattività: " +attivita + "]";
+        return "[id: " + getId() + "\nLuogo di emissione: " + getCitta() + "\ntitoli venduti:" + getConteggioTitoli() + "\nattività: " + attivita + "]";
     }
 }
