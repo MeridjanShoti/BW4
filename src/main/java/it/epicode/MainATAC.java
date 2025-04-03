@@ -1,7 +1,10 @@
 package it.epicode;
 
 import it.epicode.dao.*;
+import it.epicode.entities.mezzi.Autobus;
+import it.epicode.entities.mezzi.InterventoManutenzione;
 import it.epicode.entities.mezzi.Mezzo;
+import it.epicode.entities.mezzi.Tram;
 import it.epicode.entities.persone.Utente;
 import it.epicode.entities.titoli_di_viaggio.Biglietto;
 import it.epicode.entities.titoli_di_viaggio.ConteggioByPuntoVenditaEData;
@@ -15,7 +18,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MainATAC {
-    public static void autista(){
+    public static void autista() {
         Scanner scanner = new Scanner(System.in);
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("ATAC");
         EntityManager em = emf.createEntityManager();
@@ -32,7 +35,15 @@ public class MainATAC {
         mezzoDAO.update(mezzo);
         em.close();
         emf.close();
+        if(mezzo instanceof Autobus){
+            System.out.println("brum brum, l'autobus sta partendo");
+        } else if(mezzo instanceof Tram) {
+            System.out.println("din din, il tram sta partendo");
+        } else {
+            System.out.println("non so che tipo di mezzo è ma ti assicuro che sta partendo");
+        }
     }
+
     public static void vaiAPuntoVendita() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("ATAC");
         EntityManager em = emf.createEntityManager();
@@ -151,7 +162,105 @@ public class MainATAC {
     }
 
     public static void gestisciParcoMezzi() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ATAC");
+        EntityManager em = emf.createEntityManager();
+        EmissioneDAO emissioneDAO = new EmissioneDAO(em);
+        MezzoDAO mezzoDAO = new MezzoDAO(em);
+        UtenteDAO utenteDAO = new UtenteDAO(em);
+        TitoliDiViaggioDAO titoliDiViaggioDAO = new TitoliDiViaggioDAO(em);
+        TrattaDAO trattaDAO = new TrattaDAO(em);
         System.out.println("GESTISCI PARCO MEZZI");
+        boolean continua = true;
+        while (continua) {
+            System.out.println("Scegli un'opzione:");
+            System.out.println("1. Visualizza informazioni percorso di un mezzo");
+            System.out.println("2. metti in manutenzione un mezzo");
+            System.out.println("3. rimetti in servizio un mezzo in manutenzione");
+            System.out.println("4. Visualizza informazioni mezzo");
+            System.out.println("5. Visualizza informazioni manutenzione");
+            System.out.println("0. Esci");
+            System.out.print("Scegli (1, 2, 3, 0): ");
+
+            Scanner scanner = new Scanner(System.in);
+            int scelta = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (scelta) {
+                case 1:
+                    System.out.println("inserisci l'id del mezzo");
+                    long idMezzo = scanner.nextLong();
+                    scanner.nextLine();
+                    Mezzo mezzo = mezzoDAO.getById(idMezzo);
+                    mezzo.dettagliPercorsiMezzo();
+                    break;
+                case 2:
+                    System.out.println("inserisci l'id del mezzo");
+                    long idMezzo2 = scanner.nextLong();
+                    scanner.nextLine();
+                    Mezzo mezzo2 = mezzoDAO.getById(idMezzo2);
+                    System.out.println("inserisci la data di inizio manutenzione");
+                    System.out.println("anno");
+                    int anno = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("mese");
+                    int mese = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("giorno");
+                    int giorno = scanner.nextInt();
+                    scanner.nextLine();
+                    LocalDate dataInizioManutenzione = LocalDate.of(anno, mese, giorno);
+                    InterventoManutenzione interventoManutenzione = new InterventoManutenzione();
+                    interventoManutenzione.setMezzoInManutenzione(mezzo2);
+                    interventoManutenzione.setInizioManutenzione(dataInizioManutenzione);
+                    em.getTransaction().begin();
+                    em.persist(interventoManutenzione);
+                    mezzoDAO.updateNoTx(mezzo2);
+                    em.getTransaction().commit();
+
+                    break;
+                case 3:
+                    System.out.println("inserisci l'id della manutenzione da terminare");
+                    long idIntervento = scanner.nextLong();
+                    InterventoManutenzione interventoManutenzioneDaTerminare = em.find(InterventoManutenzione.class, idIntervento);
+                    System.out.println("inserisci la data di fine manutenzione");
+                    System.out.println("anno");
+                    int anno2 = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("mese");
+                    int mese2 = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("giorno");
+                    int giorno2 = scanner.nextInt();
+                    scanner.nextLine();
+                    LocalDate dataFineManutenzione = LocalDate.of(anno2, mese2, giorno2);
+                    interventoManutenzioneDaTerminare.setFineManutenzione(dataFineManutenzione);
+                    em.getTransaction().begin();
+                    em.merge(interventoManutenzioneDaTerminare);
+                    mezzoDAO.updateNoTx(interventoManutenzioneDaTerminare.getMezzoInManutenzione());
+                    em.getTransaction().commit();
+                    break;
+                case 4:
+                    System.out.println("inserisci l'id del mezzo");
+                    long idMezzo3 = scanner.nextLong();
+                    scanner.nextLine();
+                    Mezzo mezzo3 = mezzoDAO.getById(idMezzo3);
+                    System.out.println(mezzo3.toString());
+
+                    break;
+
+                case 5:
+                    System.out.println("visualizzaMezziInManutenzione();");
+                    break;
+
+                case 0:
+                    continua = false;
+                    System.out.println("Arrivederci!");
+                    break;
+                default:
+                    System.out.println("Scelta non valida.");
+            }
+        }
+
     }
 
     public static void gestisciVendite() {
@@ -163,6 +272,7 @@ public class MainATAC {
         TitoliDiViaggioDAO titoliDiViaggioDAO = new TitoliDiViaggioDAO(em);
         TrattaDAO trattaDAO = new TrattaDAO(em);
         Scanner scanner = new Scanner(System.in);
+        System.out.println("GESTIONE VENDITE");
         System.out.println("inserisci la prima data");
         System.out.println("anno");
         int anno1 = scanner.nextInt();
@@ -186,7 +296,7 @@ public class MainATAC {
         scanner.nextLine();
         LocalDate data2 = LocalDate.of(anno2, mese2, giorno2);
         List<ConteggioByPuntoVenditaEData> conteggio = titoliDiViaggioDAO.countByPVEData(data1, data2);
-        System.out.println("il conteggio per punto vendita tra "+ data1 + " e " + data2 + " è: \n"+ conteggio.toString());
+        System.out.println("il conteggio per punto vendita tra " + data1 + " e " + data2 + " è: \n" + conteggio.toString());
         em.close();
         emf.close();
     }
@@ -202,7 +312,7 @@ public class MainATAC {
 
         boolean continua = true;
         while (continua) {
-            System.out.println("Scegli un'opzione:");
+            System.out.println("Salve signor controllore, scegli un'opzione:");
             System.out.println("1. Controlla biglietto");
             System.out.println("2. Controlla validità abbonamento");
             System.out.println("3. Conta biglietti timbrati da un mezzo");
@@ -229,7 +339,7 @@ public class MainATAC {
                     long idTessera = scanner.nextLong();
                     scanner.nextLine();
                     Tessera tessera = (Tessera) titoliDiViaggioDAO.getById(idTessera);
-                    if(titoliDiViaggioDAO.checkAbbonamentoByTessera(tessera)){
+                    if (titoliDiViaggioDAO.checkAbbonamentoByTessera(tessera)) {
                         System.out.println("titolo di viaggio valido");
                     } else {
                         System.out.println("titolo di viaggio non valido");
@@ -341,8 +451,9 @@ public class MainATAC {
                         System.out.println("Password errata");
                     }
                     break;
-                    case 3:
-                        autista();
+                case 3:
+                    autista();
+                    break;
                 case 0:
                     continua = false;
                 default:
