@@ -3,7 +3,6 @@ package it.epicode.dao;
 import it.epicode.entities.mezzi.Mezzo;
 import it.epicode.entities.titoli_di_viaggio.Biglietto;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
 
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -21,7 +20,7 @@ public class MezzoDAO {
         em.getTransaction().commit();
     }
 
-    public Mezzo getById(int id) {
+    public Mezzo getById(long id) {
         return em.find(Mezzo.class, id);
     }
 

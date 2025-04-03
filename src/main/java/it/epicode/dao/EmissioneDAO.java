@@ -13,11 +13,13 @@ import java.util.Scanner;
 
 public class EmissioneDAO {
     private  EntityManager em;
-    private  UtenteDAO utenteDAO = new UtenteDAO(em);
-    private  TitoliDiViaggioDAO tdvDAO = new TitoliDiViaggioDAO(em);
+    private  UtenteDAO utenteDAO;
+    private  TitoliDiViaggioDAO tdvDAO;
 
     public EmissioneDAO(EntityManager em) {
         this.em = em;
+        this.utenteDAO = new UtenteDAO(em);
+        this.tdvDAO = new TitoliDiViaggioDAO(em);
     }
     public void save(Emissione emissione) {
         try {
@@ -106,6 +108,7 @@ public class EmissioneDAO {
                 TitoloDiViaggio abbonamento = new Abbonamento(durataValidita, LocalDate.of(anno, mese, giorno), getById(codiceEmissione), (Tessera) tdvDAO.getById(idTessera));
                 try {
                     tdvDAO.save(abbonamento);
+                    tdvDAO.update((Tessera) tdvDAO.getById(idTessera));
                     System.out.println("Abbonamento acquistato con successo!");
                 } catch (Exception e) {
                     System.out.println("Abbonamento non emesso");
@@ -141,13 +144,7 @@ public class EmissioneDAO {
 
         }
     }
-        public boolean titoloValido (){
-            return false;
-        }
 
-        public void controllaValidita (){
-
-        }
 
 
 
