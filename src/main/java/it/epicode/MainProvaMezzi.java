@@ -28,7 +28,7 @@ public class MainProvaMezzi {
         MezzoDAO mezzoDAO = new MezzoDAO(em);
         Tratta tratta = new Tratta("Roma", "Milano", 30, null);
         trattaDAO.save(tratta);
-        Autobus autobus = new Autobus(InServizio.IN_SERVIZIO, tratta);
+        Autobus autobus = new Autobus(tratta);
         mezzoDAO.save(autobus);
         Emissione emissione = new Rivenditore("Roma", "Mario Sburroni");
         emissioneDAO.save(emissione);

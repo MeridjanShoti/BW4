@@ -2,10 +2,12 @@ package it.epicode.entities.emissioni;
 
 import it.epicode.enums.Attivita;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 
 @Entity
 public class DistributoreAutomatico extends Emissione{
+    @Enumerated (jakarta.persistence.EnumType.STRING)
     private Attivita attivita;
 
     public DistributoreAutomatico(String luogoEmissione, Attivita attivita) {

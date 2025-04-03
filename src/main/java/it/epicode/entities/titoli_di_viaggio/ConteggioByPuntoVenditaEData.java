@@ -1,5 +1,6 @@
 package it.epicode.entities.titoli_di_viaggio;
 
+
 public class ConteggioByPuntoVenditaEData {
     private Long count;
     private Long luogoEmissione;
@@ -24,8 +25,6 @@ public class ConteggioByPuntoVenditaEData {
         this.count = count;
         this.luogoEmissione = luogoEmissione;
     }
-
-
 
     public ConteggioByPuntoVenditaEData() {
     }

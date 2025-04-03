@@ -20,7 +20,6 @@ public abstract class Mezzo {
     @GeneratedValue
     private Long id;
     private int capienza;
-    private InServizio inServizio;
     private int numeroBigliettiVidimati = 0;
     @ManyToOne
     private Tratta tratta;
@@ -33,7 +32,7 @@ public abstract class Mezzo {
     public void parti() {
 
         numeroRipetizioniPercorso++;
-        setTempoEffettivoPercorrenza(((int)(Math.random() * 60)));
+        setTempoEffettivoPercorrenza(20+ ((int)(Math.random() * 40)));
         tempiEffettivi.add(tempoEffettivoPercorrenza);
         setTotaleTempoPercorso(totaleTempoPercorso + tempoEffettivoPercorrenza);
 
@@ -44,8 +43,7 @@ public abstract class Mezzo {
         this.numeroBigliettiVidimati++;
     }
 
-    public Mezzo(InServizio inServizio, Tratta tratta) {
-        this.inServizio = inServizio;
+    public Mezzo(Tratta tratta) {
         this.tratta = tratta;
     }
 
@@ -68,13 +66,7 @@ public abstract class Mezzo {
         this.capienza = capienza;
     }
 
-    public InServizio getInServizio() {
-        return inServizio;
-    }
 
-    public void setInServizio(InServizio inServizio) {
-        this.inServizio = inServizio;
-    }
 
     public int getNumeroBigliettiVidimati() {
         return numeroBigliettiVidimati;
@@ -136,7 +128,7 @@ public abstract class Mezzo {
 
     @Override
     public String toString() {
-        return "[id: " + id + "\ncapienza: " + capienza + "\nin servizio: " + inServizio + "\nnumero biglietti vidimati: " + numeroBigliettiVidimati + "]";
+        return "[id: " + id + "\ncapienza: " + capienza + "\nin servizio: " + "\nnumero biglietti vidimati: " + numeroBigliettiVidimati + "]";
     }
     public void dettagliPercorsiMezzo() {
         System.out.println("percorso fatto " + this.getNumeroRipetizioniPercorso() + " volte");

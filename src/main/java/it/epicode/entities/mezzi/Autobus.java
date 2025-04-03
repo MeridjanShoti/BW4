@@ -7,15 +7,15 @@ import jakarta.persistence.Table;
 
 @Entity
 public class Autobus extends Mezzo {
-    public Autobus(InServizio inServizio, Tratta tratta) {
-        super(inServizio, tratta);
+    public Autobus( Tratta tratta) {
+        super(tratta);
         setCapienza(50);
     }
     public Autobus() {
     }
     @Override
     public String toString() {
-        return "[Tipo mezzo: autobus \nid" + getId() + "\ncapienza: " + getCapienza() + "\nin servizio: " + getInServizio() + "\nnumero biglietti vidimati: " + getNumeroBigliettiVidimati() + "]";
+        return "[Tipo mezzo: autobus \nid" + getId() + "\ncapienza: " + getCapienza() + "\nin servizio: " + "\nnumero biglietti vidimati: " + getNumeroBigliettiVidimati() + "]";
     }
 
 }

@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class MainATAC {
-    public static void main(String[] args) {
+    public static void vaiAPuntoVendita (){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("ATAC");
         EntityManager em = emf.createEntityManager();
         EmissioneDAO emissioneDAO = new EmissioneDAO(em);
@@ -18,80 +18,6 @@ public class MainATAC {
         UtenteDAO utenteDAO = new UtenteDAO(em);
         TitoliDiViaggioDAO titoliDiViaggioDAO = new TitoliDiViaggioDAO(em);
         TrattaDAO trattaDAO = new TrattaDAO(em);
-
-     /*   Utente utente = new Utente("Giuseppe", "Verdi", null);
-        Utente utente2 = new Utente("Mario", "Rossi", null);
-        Utente utente3 = new Utente("Luca", "Bianchi", null);
-        Utente utente4 = new Utente("Andrea", "Neri", null);
-        Utente utente5 = new Utente("Francesca", "Gialli", null);
-        Utente utente6 = new Utente("Sara", "Azzurri", null);
-        Utente utente7 = new Utente("Giovanni", "Viola", null);
-        Utente utente8 = new Utente("Paolo", "Marroni", null);
-        Utente utente9 = new Utente("Valentina", "Rosa", null);
-        Utente utente10 = new Amministratore("Elena", "Blu", null);
-
-        List<Utente> utenti = List.of(utente, utente2, utente3, utente4, utente5, utente6, utente7, utente8, utente9, utente10);
-
-        Emissione emissione = new Rivenditore("Roma", "Giuseppe");
-        Emissione emissione2 = new Rivenditore("Milano", "Mario");
-        Emissione emissione3 = new DistributoreAutomatico("Torino", Attivita.ATTIVO);
-        Emissione emissione4 = new DistributoreAutomatico("Roma", Attivita.FUORI_SERVIZIO);
-
-        List<Emissione> emissioni = List.of(emissione, emissione2, emissione3, emissione4);
-
-        TitoloDiViaggio biglietto = new Biglietto(LocalDate.of(2023, 12, 31), emissione3);
-        TitoloDiViaggio biglietto2 = new Biglietto(LocalDate.of(2023, 12, 31), emissione2);
-        TitoloDiViaggio tessera = new Tessera(LocalDate.of(2025, 1, 31), emissione, null);
-        TitoloDiViaggio tessera2 = new Tessera(LocalDate.of(2025, 1, 31), emissione2,  null);
-        TitoloDiViaggio tessera3 = new Tessera(LocalDate.of(2025, 1, 31), emissione3,  null);
-        TitoloDiViaggio tessera4 = new Tessera(LocalDate.of(2025, 1, 31), emissione2,  null);
-        TitoloDiViaggio tessera5 = new Tessera(LocalDate.of(2025, 1, 31), emissione,  null);
-        TitoloDiViaggio tessera6 = new Tessera(LocalDate.of(2025, 1, 31), emissione2, null);
-        TitoloDiViaggio tessera7 = new Tessera(LocalDate.of(2025, 1, 31), emissione3, null);
-        TitoloDiViaggio tessera8 = new Tessera(LocalDate.of(2025, 1, 31), emissione3,  null);
-        TitoloDiViaggio tessera9 = new Tessera(LocalDate.of(2025, 1, 31), emissione2,  null);
-        TitoloDiViaggio tessera10 = new Tessera(LocalDate.of(2023, 12, 31), emissione4, null);
-
-        List<TitoloDiViaggio> titoliDiViaggio = List.of(biglietto, biglietto2, tessera, tessera2, tessera3, tessera4, tessera5, tessera6, tessera7, tessera8, tessera9, tessera10);
-
-        TitoloDiViaggio abbonamento = new Abbonamento(DurataValidita.MENSILE, LocalDate.of(2024, 12, 31), emissione3, (Tessera) tessera);
-        TitoloDiViaggio abbonamento2 = new Abbonamento(DurataValidita.SETTIMANALE, LocalDate.of(2025, 3, 31), emissione2, (Tessera) tessera2);
-        TitoloDiViaggio abbonamento3 = new Abbonamento(DurataValidita.MENSILE, LocalDate.of(2025, 3, 31), emissione3, (Tessera) tessera3);
-        TitoloDiViaggio abbonamento4 = new Abbonamento(DurataValidita.SETTIMANALE, LocalDate.of(2025, 3, 31), emissione, (Tessera) tessera4);
-        TitoloDiViaggio abbonamento5 = new Abbonamento(DurataValidita.MENSILE, LocalDate.of(2025, 3, 31), emissione, (Tessera) tessera5);
-        TitoloDiViaggio abbonamento6 = new Abbonamento(DurataValidita.SETTIMANALE, LocalDate.of(2025, 3, 31), emissione2, (Tessera) tessera6);
-        TitoloDiViaggio abbonamento7 = new Abbonamento(DurataValidita.MENSILE, LocalDate.of(2025, 3, 31), emissione3, (Tessera) tessera7);
-        TitoloDiViaggio abbonamento8 = new Abbonamento(DurataValidita.SETTIMANALE, LocalDate.of(2025, 3, 31), emissione3, (Tessera) tessera8);
-        TitoloDiViaggio abbonamento9 = new Abbonamento(DurataValidita.MENSILE, LocalDate.of(2025, 3, 31), emissione, (Tessera) tessera9);
-
-        List<TitoloDiViaggio> titoliDiViaggio2 = List.of(abbonamento, abbonamento2, abbonamento3, abbonamento4, abbonamento5, abbonamento6, abbonamento7, abbonamento8, abbonamento9);
-
-        Tratta tratta = new Tratta( "Roma", "Milano", 200, null);
-        Tratta tratta2 = new Tratta("Milano", "Torino", 300, null);
-
-        List<Tratta> tratte = List.of(tratta, tratta2);
-
-
-        Mezzo  mezzo = new Autobus(InServizio.IN_SERVIZIO, tratta);
-        Mezzo  mezzo2 = new Autobus(InServizio.IN_SERVIZIO, tratta2);
-        Mezzo  mezzo3 = new Autobus(InServizio.IN_SERVIZIO, tratta);
-        Mezzo  mezzo4 = new Autobus(InServizio.IN_MANUTENZIONE, tratta2);
-        Mezzo  mezzo5 = new Tram(InServizio.IN_SERVIZIO, tratta);
-        Mezzo  mezzo6 = new Tram(InServizio.IN_MANUTENZIONE, tratta2);
-        Mezzo  mezzo7 = new Tram(InServizio.IN_SERVIZIO, tratta);
-
-        List<Mezzo> mezzi = List.of(mezzo, mezzo2, mezzo3, mezzo4, mezzo5, mezzo6, mezzo7);
-
-        em.getTransaction().begin();
-        utenti.forEach(personeDAO::saveNoTx);
-        emissioni.forEach(emissioneDAO::saveNoTx);
-        titoliDiViaggio.forEach(titoliDiViaggioDAO::saveNoTx);
-        titoliDiViaggio2.forEach(titoliDiViaggioDAO::saveNoTx);
-        tratte.forEach(trattaDAO::saveNoTx);
-        mezzi.forEach(mezzoDAO::saveNoTx);
-        em.getTransaction().commit();
-        EmissioneDAO.vendiTitoloDiViaggio();  */
-
 
         Scanner scanner = new Scanner(System.in);
         boolean continua = true;
@@ -102,7 +28,7 @@ public class MainATAC {
             System.out.println("2. Crea tessera per utente");
             System.out.println("3. Acquista biglietto o abbonamento");
             System.out.println("4. Uscire");
-            System.out.print("Scegli (1, 2, 3, 4): ");
+            System.out.print("Scegli (1, 2, 3, 0): ");
             int scelta = scanner.nextInt();
 
             switch (scelta) {
@@ -135,10 +61,10 @@ public class MainATAC {
                     }
                     break;
                 case 3:
-                   emissioneDAO.vendiTitoloDiViaggio();
+                    emissioneDAO.vendiTitoloDiViaggio();
                     break;
 
-                case 4:
+                case 0:
                     continua = false;
                     System.out.println("Arrivederci!");
                     break;
@@ -146,5 +72,36 @@ public class MainATAC {
                     System.out.println("Scelta non valida.");
             }
         }
+    }
+    public static void main(String[] args) {
+        System.out.println("Sei Utente o amministratore?");
+        System.out.println("1. Utente");
+        System.out.println("2. Amministratore");
+        Scanner scanner = new Scanner(System.in);
+        int scelta = scanner.nextInt();
+        scanner.nextLine();
+        boolean continua = true;
+        while(continua){
+            switch (scelta) {
+                case 1:
+                    vaiAPuntoVendita();
+                    break;
+                case 2:
+                    System.out.println("Inserisci la password");
+                    String password = scanner.nextLine();
+                    if (password.equals("admin")) {
+                        System.out.println("Sei un amministratore");
+                    } else {
+                        System.out.println("Password errata");
+                    }
+                    break;
+                case 0:
+                    continua = false;
+                default:
+                    System.out.println("Scelta non valida.");
+                    break;
+            }
+        }
+
     }
 }

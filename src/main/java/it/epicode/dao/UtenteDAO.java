@@ -48,6 +48,7 @@ public class UtenteDAO {
         em.persist(utente);
         em.getTransaction().commit();
         System.out.println("Utente creato: " + nome + " " + cognome);
+        System.out.println("id: " + utente.getId());
     }
 
     public void creaTessera(Utente utente, LocalDate  dataEmissione) {
@@ -61,6 +62,8 @@ public class UtenteDAO {
 
         utente.setTessera(tessera);
         System.out.println("Tessera creata per " + utente.getNome() + " " + utente.getCognome());
+        System.out.println("id: " + tessera.getId());
+        update(utente);
     }
 
 

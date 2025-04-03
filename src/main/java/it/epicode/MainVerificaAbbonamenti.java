@@ -2,6 +2,8 @@ package it.epicode;
 
 import it.epicode.dao.*;
 import it.epicode.entities.emissioni.Emissione;
+import it.epicode.entities.mezzi.Autobus;
+import it.epicode.entities.mezzi.Mezzo;
 import it.epicode.entities.titoli_di_viaggio.ConteggioByPuntoVenditaEData;
 import it.epicode.entities.titoli_di_viaggio.Tessera;
 import it.epicode.entities.titoli_di_viaggio.TitoloDiViaggio;
@@ -31,6 +33,7 @@ public class MainVerificaAbbonamenti {
         List<ConteggioByPuntoVenditaEData> conteggio = titoliDiViaggioDAO.countByPVEData(LocalDate.of(2023, 11, 1), LocalDate.of(2026, 11, 30));
         System.out.println(conteggio.toString());
         Tessera tessera3 = (Tessera) titoliDiViaggioDAO.getById(3L);
+
 
     }
 }

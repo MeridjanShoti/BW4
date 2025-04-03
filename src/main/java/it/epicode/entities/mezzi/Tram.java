@@ -7,15 +7,15 @@ import jakarta.persistence.Table;
 
 @Entity
 public class Tram extends Mezzo {
-    public Tram(InServizio inServizio, Tratta tratta) {
-        super(inServizio, tratta);
+    public Tram( Tratta tratta) {
+        super(tratta);
         setCapienza(150);
     }
     public Tram() {
     }
     @Override
     public String toString() {
-        return "[Tipo mezzo: tram \nid" + getId() + "\ncapienza: " + getCapienza() + "\nin servizio: " + getInServizio() + "\nnumero biglietti vidimati: " + getNumeroBigliettiVidimati() + "]";
+        return "[Tipo mezzo: tram \nid" + getId() + "\ncapienza: " + getCapienza() + "\nin servizio: " + "\nnumero biglietti vidimati: " + getNumeroBigliettiVidimati() + "]";
     }
 
 }

@@ -1,11 +1,12 @@
 package it.epicode.entities.mezzi;
-
 import jakarta.persistence.*;
-
+import jakarta.persistence.GenerationType;
 import java.time.LocalDate;
 @Entity
 public class InterventoManutenzione {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private LocalDate inizioManutenzione;
     private LocalDate fineManutenzione;
     @ManyToOne
@@ -48,4 +49,5 @@ public class InterventoManutenzione {
                 ", fineManutenzione=" + fineManutenzione +
                 ", mezzoInManutenzione=" + mezzoInManutenzione ;
     }
+
 }

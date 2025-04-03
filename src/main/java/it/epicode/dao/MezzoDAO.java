@@ -68,7 +68,7 @@ public class MezzoDAO {
             biglietto.setMezzo(mezzo);
             bigliettoDAO.update(biglietto);
         } else {
-            System.out.println("biglietto non valido scendi subito stronzo");
+            System.out.println("biglietto non valido scendi subito");
         }
     }
 }

@@ -67,7 +67,7 @@ public class EmissioneDAO {
         System.out.println("Seleziona l'operazione da effettuare: ");
         System.out.println("1. Acquista un abbonamento");
         System.out.println("2. Acquista un biglietto");
-        System.out.println("3. Esci");
+        System.out.println("0. Esci");
         int scelta = scanner.nextInt();
         scanner.nextLine();
         switch (scelta) {
@@ -108,7 +108,7 @@ public class EmissioneDAO {
                     tdvDAO.save(abbonamento);
                     System.out.println("Abbonamento acquistato con successo!");
                 } catch (Exception e) {
-                    tdvDAO.update(abbonamento);
+                    System.out.println("Abbonamento non emesso");
                 }
                 break;
             case 2:
@@ -129,10 +129,10 @@ public class EmissioneDAO {
                     tdvDAO.save(biglietto);
                     System.out.println("Biglietto acquistato con successo!");
                 } catch (Exception e) {
-                    tdvDAO.update(biglietto);
+                    System.out.println("Biglietto non emesso");
                 }
                 break;
-            case 3:
+            case 0:
                 System.out.println("Hai selezionato: Esci");
                 break;
             default:
