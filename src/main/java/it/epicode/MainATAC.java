@@ -102,7 +102,6 @@ public class MainATAC {
                 }
                 break;
             case 2:
-                System.out.println("inserisci la data di inizio");
                 System.out.println("inserisci la prima data");
                 System.out.println("anno");
                 int anno1 = 0;
@@ -116,6 +115,7 @@ public class MainATAC {
                 if (anno1 == 0) {
                     break;
                 }
+                System.out.println("mese");
                 int mese1 = 0;
                 try {
                     mese1 = scanner.nextInt();
@@ -127,6 +127,7 @@ public class MainATAC {
                 if (mese1 == 0) {
                     break;
                 }
+                System.out.println("giorno");
                 int giorno1 = 0;
                 try {
                     giorno1 = scanner.nextInt();
@@ -151,6 +152,7 @@ public class MainATAC {
                 if (anno2 == 0) {
                     break;
                 }
+                System.out.println("mese");
                 int mese2 = 0;
                 try {
                     mese2 = scanner.nextInt();
@@ -162,6 +164,7 @@ public class MainATAC {
                 if (mese2 == 0) {
                     break;
                 }
+                System.out.println("giorno");
                 int giorno2 = 0;
                 try {
                     giorno2 = scanner.nextInt();

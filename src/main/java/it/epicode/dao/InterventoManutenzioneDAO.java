@@ -79,7 +79,7 @@ public class InterventoManutenzioneDAO {
         return em.createNamedQuery("InterventoManutenzione.checkManutenzioneByMezzo", InterventoManutenzione.class).setParameter("mezzoInManutenzione", mezzo).getResultList();
     }
     public List<InterventoManutenzione> trovaManutenzioniByData(LocalDate data1, LocalDate data2) {
-        return em.createNamedQuery("InterventoManutenzione.checkManutenzioneByData", InterventoManutenzione.class).setParameter("inizioManutenzione", data1).setParameter("fineManutenzione", data2).getResultList();
+        return em.createNamedQuery("InterventoManutenzione.checkManutenzioneByData", InterventoManutenzione.class).setParameter("data1", data1).setParameter("data2", data2).getResultList();
     }
     public List<InterventoManutenzione> trovaManutenzioni() {
         return em.createNamedQuery("InterventoManutenzione.checkManutenzioneByTutti", InterventoManutenzione.class).getResultList();
