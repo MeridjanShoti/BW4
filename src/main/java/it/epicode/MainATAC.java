@@ -62,6 +62,139 @@ public class MainATAC {
         em.close();
         emf.close();
     }
+    public static void visualizzaInManutenzione() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ATAC");
+        EntityManager em = emf.createEntityManager();
+        InterventoManutenzioneDAO interventoManutenzioneDAO = new InterventoManutenzioneDAO(em);
+        MezzoDAO mezzoDAO = new MezzoDAO(em);
+        System.out.println("inserisci un'opzione");
+        System.out.println("1. visualizza manutenzioni per Id mezzo");
+        System.out.println("2. visualizza manutenzioni per data");
+        System.out.println("3. visualizza tutte le manutenzioni");
+
+        int scelta = 50;
+        Scanner scanner = new Scanner(System.in);
+        try {
+            scelta = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("dovevi inserire un numero");
+        } finally {
+            scanner.nextLine();
+        }
+        switch (scelta) {
+            case 1:
+                System.out.println("inserisci l'id del mezzo");
+                Long idMezzo = 0L;
+                try {
+                    idMezzo = scanner.nextLong();
+                } catch (InputMismatchException e) {
+                    System.out.println("dovevi inserire un numero");
+                } finally {
+                    scanner.nextLine();
+                }
+                if (idMezzo == 0L) {
+                    break;
+                }
+                Mezzo mezzo = mezzoDAO.getById(idMezzo);
+                List<InterventoManutenzione> manutenzioni = interventoManutenzioneDAO.trovaManutenzioniByMezzo(mezzo);
+                for (InterventoManutenzione manutenzione : manutenzioni) {
+                    System.out.println(manutenzione);
+                }
+                break;
+            case 2:
+                System.out.println("inserisci la data di inizio");
+                System.out.println("inserisci la prima data");
+                System.out.println("anno");
+                int anno1 = 0;
+                try {
+                    anno1 = scanner.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("dovevi inserire un numero");
+                } finally {
+                    scanner.nextLine();
+                }
+                if (anno1 == 0) {
+                    break;
+                }
+                int mese1 = 0;
+                try {
+                    mese1 = scanner.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("dovevi inserire un numero");
+                } finally {
+                    scanner.nextLine();
+                }
+                if (mese1 == 0) {
+                    break;
+                }
+                int giorno1 = 0;
+                try {
+                    giorno1 = scanner.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("dovevi inserire un numero");
+                } finally {
+                    scanner.nextLine();
+                }
+                if (giorno1 == 0) {
+                    break;
+                }
+                System.out.println("inserisci la seconda data");
+                System.out.println("anno");
+                int anno2 = 0;
+                try {
+                    anno2 = scanner.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("dovevi inserire un numero");
+                } finally {
+                    scanner.nextLine();
+                }
+                if (anno2 == 0) {
+                    break;
+                }
+                int mese2 = 0;
+                try {
+                    mese2 = scanner.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("dovevi inserire un numero");
+                } finally {
+                    scanner.nextLine();
+                }
+                if (mese2 == 0) {
+                    break;
+                }
+                int giorno2 = 0;
+                try {
+                    giorno2 = scanner.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("dovevi inserire un numero");
+                } finally {
+                    scanner.nextLine();
+                }
+                if (giorno2 == 0) {
+                    break;
+                }
+                LocalDate data1 = LocalDate.of(anno1, mese1, giorno1);
+                LocalDate data2 = LocalDate.of(anno2, mese2, giorno2);
+
+                List<InterventoManutenzione> manutenzioni2 = interventoManutenzioneDAO.trovaManutenzioniByData(data1, data2);
+                for (InterventoManutenzione manutenzione : manutenzioni2) {
+                    System.out.println(manutenzione);
+                }
+                break;
+            case 3:
+                List<InterventoManutenzione> manutenzioni3 = interventoManutenzioneDAO.trovaManutenzioni();
+                for (InterventoManutenzione manutenzione : manutenzioni3) {
+                    System.out.println(manutenzione);
+                }
+                break;
+            default:
+                System.out.println("opzione non valida");
+                break;
+        }
+
+        em.close();
+        emf.close();
+    }
 
     public static void vaiAPuntoVendita() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("ATAC");
@@ -499,7 +632,7 @@ public class MainATAC {
                     break;
 
                 case 5:
-                    System.out.println("visualizzaMezziInManutenzione();");
+                    visualizzaInManutenzione();
                     break;
 
                 case 0:

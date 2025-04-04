@@ -6,6 +6,9 @@ import jakarta.persistence.GenerationType;
 import java.time.LocalDate;
 
 @Entity
+@NamedQuery(name = "InterventoManutenzione.checkManutenzioneByMezzo", query = "SELECT i FROM InterventoManutenzione i WHERE i.mezzoInManutenzione = :mezzoInManutenzione")
+@NamedQuery(name = "InterventoManutenzione.chekManutenzioneByData", query = "SELECT i FROM InterventoManutenzione i WHERE i.inizioManutenzione BETWEEN :data1 AND :data2")
+@NamedQuery(name = "InterventoManutenzione.checkManutenzioneByTutti", query = "SELECT i FROM InterventoManutenzione i")
 public class InterventoManutenzione {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,11 +61,13 @@ public class InterventoManutenzione {
         this.id = id;
     }
 
+
     @Override
     public String toString() {
-        return "inizioManutenzione=" + inizioManutenzione +
+        return "[Id Manutenzione: " + id +
+                "inizioManutenzione=" + inizioManutenzione +
                 ", fineManutenzione=" + fineManutenzione +
-                ", mezzoInManutenzione=" + mezzoInManutenzione;
+                ", mezzoInManutenzione=" + mezzoInManutenzione.getId() + "]";
     }
 
 }

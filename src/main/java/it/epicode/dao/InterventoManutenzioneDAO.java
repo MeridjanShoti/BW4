@@ -5,6 +5,7 @@ import it.epicode.entities.mezzi.Mezzo;
 import jakarta.persistence.EntityManager;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 public class InterventoManutenzioneDAO {
@@ -73,6 +74,15 @@ public class InterventoManutenzioneDAO {
     public void finisciManutenzione(InterventoManutenzione interventoManutenzione, LocalDate localDate) {
         interventoManutenzione.setFineManutenzione(localDate);
         update(interventoManutenzione);
+    }
+    public List<InterventoManutenzione> trovaManutenzioniByMezzo(Mezzo mezzo) {
+        return em.createNamedQuery("InterventoManutenzione.checkManutenzioneByMezzo", InterventoManutenzione.class).setParameter("mezzoInManutenzione", mezzo).getResultList();
+    }
+    public List<InterventoManutenzione> trovaManutenzioniByData(LocalDate data1, LocalDate data2) {
+        return em.createNamedQuery("InterventoManutenzione.checkManutenzioneByData", InterventoManutenzione.class).setParameter("inizioManutenzione", data1).setParameter("fineManutenzione", data2).getResultList();
+    }
+    public List<InterventoManutenzione> trovaManutenzioni() {
+        return em.createNamedQuery("InterventoManutenzione.checkManutenzioneByTutti", InterventoManutenzione.class).getResultList();
     }
 
 }
