@@ -181,6 +181,7 @@ public class EmissioneDAO {
                             throw new ErroreDiInserimentoException("Errore nell'inserimento");
                         }
                         tdvDAO.save(abbonamento);
+                        ((Tessera) tdvDAO.getById(idTessera)).setAbbonamento((Abbonamento) abbonamento);
                         tdvDAO.update(tdvDAO.getById(idTessera));
                         System.out.println("Abbonamento con id " + abbonamento.getId() + " acquistato con successo!");
                     } catch (ErroreDiInserimentoException e) {

@@ -118,6 +118,17 @@ public class MainCreazione {
         utente8.setTessera((Tessera) tessera8);
         utente9.setTessera((Tessera) tessera9);
         utente10.setTessera((Tessera) tessera10);
+
+        ((Tessera) tessera1).setAbbonamento((Abbonamento) abbonamento);
+        ((Tessera) tessera2).setAbbonamento((Abbonamento) abbonamento2);
+        ((Tessera) tessera3).setAbbonamento((Abbonamento) abbonamento3);
+        ((Tessera) tessera4).setAbbonamento((Abbonamento) abbonamento4);
+        ((Tessera) tessera5).setAbbonamento((Abbonamento) abbonamento5);
+        ((Tessera) tessera6).setAbbonamento((Abbonamento) abbonamento6);
+        ((Tessera) tessera7).setAbbonamento((Abbonamento) abbonamento7);
+        ((Tessera) tessera8).setAbbonamento((Abbonamento) abbonamento8);
+        ((Tessera) tessera9).setAbbonamento((Abbonamento) abbonamento9);
+
         em.getTransaction().begin();
 
         mezzi.forEach(mezzoDAO::updateNoTx);
