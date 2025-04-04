@@ -437,7 +437,7 @@ public class MainATAC {
             System.out.println("4. Visualizza informazioni mezzo");
             System.out.println("5. Visualizza informazioni manutenzione");
             System.out.println("0. Esci");
-            System.out.print("Scegli (1, 2, 3, 0): ");
+            System.out.print("Scegli (1, 2, 3, 4, 5, 0): ");
 
             Scanner scanner = new Scanner(System.in);
             int scelta = 50;
