@@ -30,6 +30,7 @@ public class InterventoManutenzione {
 
     public void setInizioManutenzione(LocalDate inizioManutenzione) {
         this.inizioManutenzione = inizioManutenzione;
+        System.out.println("manutenzione iniziata il " + inizioManutenzione);
     }
 
     public LocalDate getFineManutenzione() {
@@ -38,6 +39,7 @@ public class InterventoManutenzione {
 
     public void setFineManutenzione(LocalDate fineManutenzione) {
         this.fineManutenzione = fineManutenzione;
+        System.out.println("manutenzione finita il " + fineManutenzione);
     }
 
     public Mezzo getMezzoInManutenzione() {
