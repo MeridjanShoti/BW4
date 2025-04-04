@@ -129,6 +129,10 @@ public class MainCreazione {
         ((Tessera) tessera8).setAbbonamento((Abbonamento) abbonamento8);
         ((Tessera) tessera9).setAbbonamento((Abbonamento) abbonamento9);
 
+        emissione.setConteggioTitoli(3);
+        emissione2.setConteggioTitoli(3);
+        emissione3.setConteggioTitoli(5);
+
         em.getTransaction().begin();
 
         mezzi.forEach(mezzoDAO::updateNoTx);
