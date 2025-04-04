@@ -65,6 +65,9 @@ public class MezzoDAO {
             } finally {
                 sc.nextLine();
             }
+            if (anno == 0) {
+                return;
+            }
             System.out.println("che mese è?");
             int mese = 0;
             try {
@@ -73,6 +76,9 @@ public class MezzoDAO {
                 System.out.println("dovevi inserire un numero!");
             } finally {
                 sc.nextLine();
+            }
+            if (mese == 0) {
+                return;
             }
             System.out.println("che giorno è?");
             int giorno = 0;
@@ -83,7 +89,13 @@ public class MezzoDAO {
             } finally {
                 sc.nextLine();
             }
+            if (giorno == 0) {
+                return;
+            }
             try {
+                if (anno == 0 || mese == 0 || giorno == 0) {
+                    throw new ErroreDiInserimentoException("Errore nell'inserimento");
+                }
                 biglietto.setDataTimbro(LocalDate.of(anno, mese, giorno));
                 biglietto.setMezzo(mezzo);
                 bigliettoDAO.update(biglietto);

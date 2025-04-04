@@ -39,6 +39,9 @@ public class MainATAC {
         } finally {
             scanner.nextLine();
         }
+        if (idMezzo == 0L) {
+            return;
+        }
         Mezzo mezzo = null;
         try {
             if (idMezzo == 0L) {
@@ -55,8 +58,6 @@ public class MainATAC {
             System.out.println("brum brum, l'autobus sta partendo");
         } else if (mezzo instanceof Tram) {
             System.out.println("din din, il tram sta partendo");
-        } else {
-            System.out.println("non so che tipo di mezzo è ma ti assicuro che sta partendo");
         }
         em.close();
         emf.close();
@@ -105,8 +106,12 @@ public class MainATAC {
                         idUtente = scanner.nextLong();
                     } catch (InputMismatchException e) {
                         System.out.println("dovevi inserire un numero");
+                        break;
                     } finally {
                         scanner.nextLine();
+                    }
+                    if (idUtente == 0L) {
+                        break;
                     }
                     System.out.println("Inserisci l'anno corrente");
                     int anno = 0;
@@ -117,6 +122,9 @@ public class MainATAC {
                     } finally {
                         scanner.nextLine();
                     }
+                    if (anno == 0) {
+                        break;
+                    }
                     System.out.println("Inserisci il mese corrente");
                     int mese = 0;
                     try {
@@ -125,6 +133,9 @@ public class MainATAC {
                         System.out.println("dovevi inserire un numero");
                     } finally {
                         scanner.nextLine();
+                    }
+                    if (mese == 0) {
+                        break;
                     }
                     System.out.println("Inserisci il giorno corrente");
                     int giorno = 0;
@@ -135,11 +146,17 @@ public class MainATAC {
                     } finally {
                         scanner.nextLine();
                     }
+                    if (giorno == 0) {
+                        break;
+                    }
                     LocalDate dataEmissione = null;
                     Utente utente = null;
                     try {
                         if (anno == 0 || mese == 0 || giorno == 0) {
                             throw new ErroreDiInserimentoException("data non valida");
+                        }
+                        if (idUtente == 0L) {
+                            throw new ErroreDiInserimentoException("utente non trovato");
                         }
                         dataEmissione = LocalDate.of(anno, mese, giorno);
                         utente = em.find(Utente.class, idUtente);
@@ -211,27 +228,43 @@ public class MainATAC {
                     } finally {
                         scanner.nextLine();
                     }
-                    System.out.println("inserisci l'id del mezzo da prendere");
-                    long idMezzo = 0;
-                    try {
-                        idMezzo = scanner.nextLong();
-                    } catch (Exception e) {
-                        System.out.println("dovevi inserire un numero");
-                    } finally {
-                        scanner.nextLine();
+                    if (idBiglietto == null) {
+                        break;
                     }
-                    try {
-                        if (!(titoliDiViaggioDAO.getById(idBiglietto) instanceof Biglietto)) {
-                            throw new TipoTitoloDiViaggioException("il titolo di viaggio non è un biglietto");
+                    long idMezzo = 0L;
+                    if (idBiglietto != null) {
+                        System.out.println("inserisci l'id del mezzo da prendere");
+                        try {
+                            idMezzo = scanner.nextLong();
+                        } catch (Exception e) {
+                            System.out.println("dovevi inserire un numero");
+                        } finally {
+                            scanner.nextLine();
                         }
+                    }
+                    if (idMezzo == 0L) {
+                        break;
+                    }
+
+                    try {
                         if (idBiglietto == null || idMezzo == 0) {
                             throw new ErroreDiInserimentoException("Errore nell'inserimento. Biglietto non timbrato.");
                         }
-                        Mezzo mezzo = mezzoDAO.getById(idMezzo);
-                        Biglietto biglietto = (Biglietto) titoliDiViaggioDAO.getById(idBiglietto);
-                        mezzoDAO.timbraBigliettoDaId(biglietto, mezzo);
-                        titoliDiViaggioDAO.update(biglietto);
-                        mezzoDAO.update(mezzo);
+                        if (!(titoliDiViaggioDAO.getById(idBiglietto) instanceof Biglietto)) {
+                            throw new TipoTitoloDiViaggioException("il titolo di viaggio non è un biglietto");
+                        }
+                        try {
+                            if (idMezzo == 0L || idBiglietto == null) {
+                                throw new ErroreDiInserimentoException("Errore nell'inserimento. Biglietto non timbrato.");
+                            }
+                            Mezzo mezzo = mezzoDAO.getById(idMezzo);
+                            Biglietto biglietto = (Biglietto) titoliDiViaggioDAO.getById(idBiglietto);
+                            mezzoDAO.timbraBigliettoDaId(biglietto, mezzo);
+                            titoliDiViaggioDAO.update(biglietto);
+                            mezzoDAO.update(mezzo);
+                        } catch (ErroreDiInserimentoException e) {
+                            System.out.println(e.getMessage());
+                        }
                     } catch (TipoTitoloDiViaggioException e) {
                         System.out.println(e.getMessage());
                     } catch (ErroreDiInserimentoException e) {
@@ -291,6 +324,7 @@ public class MainATAC {
                     } finally {
                         scanner.nextLine();
                     }
+
                     try {
                         if (idMezzo == 0L) {
                             throw new ErroreDiInserimentoException("Errore nell'inserimento");
@@ -311,6 +345,9 @@ public class MainATAC {
                     } finally {
                         scanner.nextLine();
                     }
+                    if (idMezzo2 == 0L) {
+                        break;
+                    }
                     Mezzo mezzo2 = null;
                     if (idMezzo2 != 0L) {
                         mezzo2 = mezzoDAO.getById(idMezzo2);
@@ -325,6 +362,9 @@ public class MainATAC {
                     } finally {
                         scanner.nextLine();
                     }
+                    if (anno == 0) {
+                        break;
+                    }
                     System.out.println("mese");
                     int mese = 0;
                     try {
@@ -334,6 +374,9 @@ public class MainATAC {
                     } finally {
                         scanner.nextLine();
                     }
+                    if (mese == 0) {
+                        break;
+                    }
                     System.out.println("giorno");
                     int giorno = 0;
                     try {
@@ -342,6 +385,9 @@ public class MainATAC {
                         System.out.println("dovevi inserire un numero");
                     } finally {
                         scanner.nextLine();
+                    }
+                    if (giorno == 0) {
+                        break;
                     }
                     try {
                         if (anno == 0 || mese == 0 || giorno == 0 || mezzo2 == null) {
@@ -376,6 +422,8 @@ public class MainATAC {
                     InterventoManutenzione interventoManutenzioneDaTerminare = null;
                     if (idIntervento != 0L) {
                         interventoManutenzioneDaTerminare = em.find(InterventoManutenzione.class, idIntervento);
+                    } else {
+                        break;
                     }
                     System.out.println("inserisci la data di fine manutenzione");
                     System.out.println("anno");
@@ -387,6 +435,9 @@ public class MainATAC {
                     } finally {
                         scanner.nextLine();
                     }
+                    if (anno2 == 0) {
+                        break;
+                    }
                     System.out.println("mese");
                     int mese2 = 0;
                     try {
@@ -396,6 +447,9 @@ public class MainATAC {
                     } finally {
                         scanner.nextLine();
                     }
+                    if (mese2 == 0) {
+                        break;
+                    }
                     System.out.println("giorno");
                     int giorno2 = 0;
                     try {
@@ -404,6 +458,9 @@ public class MainATAC {
                         System.out.println("dovevi inserire un numero");
                     } finally {
                         scanner.nextLine();
+                    }
+                    if (giorno2 == 0) {
+                        break;
                     }
                     try {
                         if (anno2 == 0 || mese2 == 0 || giorno2 == 0 || idIntervento == 0L) {
@@ -476,6 +533,9 @@ public class MainATAC {
         } finally {
             scanner.nextLine();
         }
+        if (anno1 == 0) {
+            return;
+        }
         System.out.println("mese");
         int mese1 = 0;
         try {
@@ -485,6 +545,9 @@ public class MainATAC {
         } finally {
             scanner.nextLine();
         }
+        if (mese1 == 0) {
+            return;
+        }
         System.out.println("giorno");
         int giorno1 = 0;
         try {
@@ -493,6 +556,9 @@ public class MainATAC {
             System.out.println("Dovevi inserire un numero!");
         } finally {
             scanner.nextLine();
+        }
+        if (giorno1 == 0) {
+            return;
         }
         System.out.println("inserisci la seconda data");
         System.out.println("anno");
@@ -504,6 +570,9 @@ public class MainATAC {
         } finally {
             scanner.nextLine();
         }
+        if (anno2 == 0) {
+            return;
+        }
         System.out.println("mese");
         int mese2 = 0;
         try {
@@ -513,6 +582,9 @@ public class MainATAC {
         } finally {
             scanner.nextLine();
         }
+        if (mese2 == 0) {
+            return;
+        }
         System.out.println("giorno");
         int giorno2 = 0;
         try {
@@ -521,6 +593,9 @@ public class MainATAC {
             System.out.println();
         } finally {
             scanner.nextLine();
+        }
+        if (giorno2 == 0) {
+            return;
         }
         try {
             if (anno1 == 0 || mese1 == 0 || giorno1 == 0 || anno2 == 0 || mese2 == 0 || giorno2 == 0) {
@@ -575,12 +650,13 @@ public class MainATAC {
                         scanner.nextLine();
                     }
                     try {
+                        if (idBiglietto == 0L) {
+                        throw new ErroreDiInserimentoException("Errore nell'inserimento");
+                        }
                         if (!(titoliDiViaggioDAO.getById(idBiglietto) instanceof Biglietto)) {
                             throw new TipoTitoloDiViaggioException("il titolo di viaggio selezionato non è un biglietto");
                         }
-                        if (idBiglietto == 0L) {
-                            throw new ErroreDiInserimentoException("Errore nell'inserimento");
-                        }
+
                         Biglietto biglietto = (Biglietto) titoliDiViaggioDAO.getById(idBiglietto);
                         if (biglietto.isValidita()) {
                             System.out.println("biglietto valido");
@@ -605,12 +681,13 @@ public class MainATAC {
                         scanner.nextLine();
                     }
                     try {
+                        if (idTessera == 0L) {
+                        throw new ErroreDiInserimentoException("Errore nell'inserimento");
+                        }
                         if (!(titoliDiViaggioDAO.getById(idTessera) instanceof Tessera)) {
                             throw new TipoTitoloDiViaggioException("il titolo di viaggio selezionato non è una tessera");
                         }
-                        if (idTessera == 0L) {
-                            throw new ErroreDiInserimentoException("Errore nell'inserimento");
-                        }
+
                         Tessera tessera = (Tessera) titoliDiViaggioDAO.getById(idTessera);
                         if (titoliDiViaggioDAO.checkAbbonamentoByTessera(tessera)) {
                             System.out.println("titolo di viaggio valido");
@@ -655,6 +732,9 @@ public class MainATAC {
                     } finally {
                         scanner.nextLine();
                     }
+                    if (anno == 0) {
+                        return;
+                    }
                     System.out.println("inserisci il mese della prima data");
                     int mese = 0;
                     try {
@@ -664,6 +744,9 @@ public class MainATAC {
                     } finally {
                         scanner.nextLine();
                     }
+                    if (mese == 0) {
+                        return;
+                    }
                     System.out.println("inserisci il giorno della prima data");
                     int giorno = 0;
                     try {
@@ -672,6 +755,9 @@ public class MainATAC {
                         System.out.println("Dovevi inserire un numero!");
                     } finally {
                         scanner.nextLine();
+                    }
+                    if (giorno == 0) {
+                        return;
                     }
                     LocalDate data1 = LocalDate.of(anno, mese, giorno);
                     System.out.println("inserisci l'anno della seconda data");
@@ -683,6 +769,9 @@ public class MainATAC {
                     } finally {
                         scanner.nextLine();
                     }
+                    if (anno2 == 0) {
+                        return;
+                    }
                     System.out.println("inserisci il mese della seconda data");
                     int mese2 = 0;
                     try {
@@ -692,6 +781,9 @@ public class MainATAC {
                     } finally {
                         scanner.nextLine();
                     }
+                    if (mese2 == 0) {
+                        return;
+                    }
                     System.out.println("inserisci il giorno della seconda data");
                     int giorno2 = 0;
                     try {
@@ -700,6 +792,9 @@ public class MainATAC {
                         System.out.println("Dovevi inserire un numero!");
                     } finally {
                         scanner.nextLine();
+                    }
+                    if (giorno2 == 0) {
+                        return;
                     }
                     try {
                         if (anno == 0 || mese == 0 || giorno == 0 || anno2 == 0 || mese2 == 0 || giorno2 == 0) {
