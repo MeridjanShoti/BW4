@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Entity
 @NamedQuery(name = "InterventoManutenzione.checkManutenzioneByMezzo", query = "SELECT i FROM InterventoManutenzione i WHERE i.mezzoInManutenzione = :mezzoInManutenzione")
-@NamedQuery(name = "InterventoManutenzione.chekManutenzioneByData", query = "SELECT i FROM InterventoManutenzione i WHERE i.inizioManutenzione BETWEEN :data1 AND :data2")
+@NamedQuery(name = "InterventoManutenzione.checkManutenzioneByData", query = "SELECT i FROM InterventoManutenzione i WHERE i.inizioManutenzione BETWEEN :data1 AND :data2")
 @NamedQuery(name = "InterventoManutenzione.checkManutenzioneByTutti", query = "SELECT i FROM InterventoManutenzione i")
 //il file è modificato correttamente
 public class InterventoManutenzione {
