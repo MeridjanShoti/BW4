@@ -78,6 +78,7 @@ public class EmissioneDAO {
         System.out.println("Seleziona l'operazione da effettuare: ");
         System.out.println("1. Acquista un abbonamento");
         System.out.println("2. Acquista un biglietto");
+        System.out.println("3. Rinnova Tessera");
         System.out.println("0. Esci");
         int scelta = 50;
         try {
@@ -174,17 +175,22 @@ public class EmissioneDAO {
                     return;
                 }
                 TitoloDiViaggio abbonamento = new Abbonamento(durataValidita, LocalDate.of(anno, mese, giorno), getById(codiceEmissione), (Tessera) tdvDAO.getById(idTessera));
-                try {
-                    if (anno == 0 || mese == 0 || giorno == 0 || codiceEmissione == 0 || idTessera == 0L) {
-                        throw new ErroreDiInserimentoException("Errore nell'inserimento");
+                if (((Tessera) tdvDAO.getById(idTessera)).getDataScadenza().isAfter(LocalDate.now())) {
+                    try {
+                        if (anno == 0 || mese == 0 || giorno == 0 || codiceEmissione == 0 || idTessera == 0L) {
+                            throw new ErroreDiInserimentoException("Errore nell'inserimento");
+                        }
+                        tdvDAO.save(abbonamento);
+                        tdvDAO.update(tdvDAO.getById(idTessera));
+                        System.out.println("Abbonamento con id " + abbonamento.getId() + " acquistato con successo!");
+                    } catch (ErroreDiInserimentoException e) {
+                        System.out.println(e.getMessage());
+                    } catch (Exception e) {
+                        System.out.println("Abbonamento non emesso");
                     }
-                    tdvDAO.save(abbonamento);
-                    tdvDAO.update(tdvDAO.getById(idTessera));
-                    System.out.println("Abbonamento con id " + abbonamento.getId() + " acquistato con successo!");
-                } catch (ErroreDiInserimentoException e) {
-                    System.out.println(e.getMessage());
-                } catch (Exception e) {
-                    System.out.println("Abbonamento non emesso");
+                }
+                else {
+                    System.out.println("Tessera scaduta, non è possibile acquistare un abbonamento");
                 }
                 break;
             case 2:
@@ -248,6 +254,22 @@ public class EmissioneDAO {
                 } catch (Exception e) {
                     System.out.println("Biglietto non emesso");
                 }
+                break;
+                case 3:
+                System.out.println("Inserisci l'id della tessera: ");
+                long idTessera2 = 0L;
+                try {
+                    idTessera2 = scanner.nextLong();
+                    scanner.nextLine();
+                } catch (InputMismatchException e) {
+                    System.out.println("dovevi inserire un numero!");
+                }
+                if (idTessera2 == 0L) {
+                    return;
+                }
+                tdvDAO.getById(idTessera2).setDataEmissione(LocalDate.now());
+                tdvDAO.update(tdvDAO.getById(idTessera2));
+                    System.out.println("Tessera con id" + idTessera2 + " rinnovata con successo!");
                 break;
             case 0:
                 System.out.println("Hai selezionato: Esci");
